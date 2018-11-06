@@ -9,26 +9,27 @@
         android:layout_height="wrap_content"
         android:text="back"/>
 
-    <RadioGroup
-        android:id="@+id/register_type_group"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/register_customer_radio_button"
+        <Button
+            android:id="@+id/register_customer_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="customer"
-            android:checked="true"/>
+            android:background="#FFFF00"/>
 
-        <RadioButton
-            android:id="@+id/register_shop_owner_radio_button"
+        <Button
+            android:id="@+id/register_shop_owner_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="shop owner" />
-    </RadioGroup>
+            android:text="shop owner"
+            android:background="#DDDDDD"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/register_email"

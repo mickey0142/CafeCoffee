@@ -1,5 +1,6 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,6 +26,7 @@ public class RegisterFragment extends Fragment {
 
     FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fbStore = FirebaseFirestore.getInstance();
+    String type = "customer";
 
     @Nullable
     @Override
@@ -38,57 +38,83 @@ public class RegisterFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        initTypeButton();
         initRegisterButton();
         initBackButton();
     }
 
-    void initRegisterButton()
+    void initTypeButton()
     {
-        RadioGroup radioGroup = getView().findViewById(R.id.register_type_group);
-        int id = radioGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = getView().findViewById(id);
-        String type = radioButton.getText().toString();
-        EditText email = getView().findViewById(R.id.register_email);
-        EditText username = getView().findViewById(R.id.register_username);
-        EditText password = getView().findViewById(R.id.register_password);
-        String emailStr = email.getText().toString();
-        final String usernameStr = username.getText().toString();
-        String passwordStr = password.getText().toString();
-        if (emailStr.isEmpty() || usernameStr.isEmpty() || passwordStr.isEmpty())
-        {
-            Toast.makeText(getContext(), "some field is empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        final User user = new User();
-        user.setEmail(emailStr);
-        user.setUsername(usernameStr);
-        user.setType(type);
-        fbAuth.createUserWithEmailAndPassword(emailStr, passwordStr)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        final FirebaseUser fbUser = authResult.getUser();
-                        fbStore.collection("user").document(usernameStr).set(user)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        sendVerifyEmail(fbUser);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d("cafe", "add user in firestore error : " + e.getMessage());
-                                Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+        final Button customerButton = getView().findViewById(R.id.register_customer_button);
+        final Button shopOwnerButton = getView().findViewById(R.id.register_shop_owner_button);
+        customerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("cafe", "create user error : " + e.getMessage());
-                Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                type = "customer";
+                customerButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                shopOwnerButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             }
         });
+        shopOwnerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                type = "shopOwner";
+                customerButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                shopOwnerButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+            }
+        });
+    }
+
+    void initRegisterButton()
+    {
+        Button registerButton = getView().findViewById(R.id.register_register_button);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText email = getView().findViewById(R.id.register_email);
+                EditText username = getView().findViewById(R.id.register_username);
+                EditText password = getView().findViewById(R.id.register_password);
+                String emailStr = email.getText().toString();
+                final String usernameStr = username.getText().toString();
+                String passwordStr = password.getText().toString();
+                if (emailStr.isEmpty() || usernameStr.isEmpty() || passwordStr.isEmpty())
+                {
+                    Toast.makeText(getContext(), "some field is empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                final User user = new User();
+                user.setEmail(emailStr);
+                user.setUsername(usernameStr);
+                user.setType(type);
+                fbAuth.createUserWithEmailAndPassword(emailStr, passwordStr)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                final FirebaseUser fbUser = authResult.getUser();
+                                fbStore.collection("user").document(usernameStr).set(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                sendVerifyEmail(fbUser);
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("cafe", "add user in firestore error : " + e.getMessage());
+                                        Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("cafe", "create user error : " + e.getMessage());
+                        Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
     }
 
     private void sendVerifyEmail(FirebaseUser user){

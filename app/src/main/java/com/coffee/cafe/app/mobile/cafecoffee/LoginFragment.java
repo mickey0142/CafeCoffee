@@ -45,10 +45,10 @@ public class LoginFragment extends Fragment {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User("test@mail.com", "Mr.A", "customer");
+                User user = new User("scholarsbright15@gmail.com", "mickey", "customer");
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("User object", user);
-                Fragment homeFragment = new ShopFragment();
+                Fragment homeFragment = new CustomerHomeFragment();
                 homeFragment.setArguments(bundle);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -57,13 +57,13 @@ public class LoginFragment extends Fragment {
         });
 
         Button skipButton2 = getView().findViewById(R.id.login_skip_button2);
-        skipButton.setOnClickListener(new View.OnClickListener() {
+        skipButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User("test@mail.com", "Mr.A", "customer");
+                User user = new User("59070142@it.kmitl.ac.th", "maytat", "shopOwner");
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("User object", user);
-                Fragment homeFragment = new ShopFragment();
+                Fragment homeFragment = new ShopOwnerHomeFragment();
                 homeFragment.setArguments(bundle);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -84,6 +84,11 @@ public class LoginFragment extends Fragment {
                 EditText password = getView().findViewById(R.id.login_password);
                 final String emailStr = email.getText().toString();
                 String passwordStr = password.getText().toString();
+                if (emailStr.isEmpty() || passwordStr.isEmpty())
+                {
+                    Toast.makeText(getContext(), "some field is empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 fbAuth.signInWithEmailAndPassword(emailStr, passwordStr)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -103,7 +108,7 @@ public class LoginFragment extends Fragment {
                                                     {
                                                         Bundle bundle = new Bundle();
                                                         bundle.putSerializable("User object", user);
-                                                        Fragment homeFragment = new ShopFragment();
+                                                        Fragment homeFragment = new CustomerHomeFragment();
                                                         homeFragment.setArguments(bundle);
                                                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                                                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -113,7 +118,7 @@ public class LoginFragment extends Fragment {
                                                     {
                                                         Bundle bundle = new Bundle();
                                                         bundle.putSerializable("User object", user);
-                                                        Fragment homeFragment = new ShopFragment();
+                                                        Fragment homeFragment = new ShopOwnerHomeFragment();
                                                         homeFragment.setArguments(bundle);
                                                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                                                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

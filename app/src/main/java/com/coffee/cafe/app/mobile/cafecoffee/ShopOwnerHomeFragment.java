@@ -12,15 +12,14 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class ShopFragment extends Fragment {
-
+public class ShopOwnerHomeFragment extends Fragment {
     FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fbStore = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+        return inflater.inflate(R.layout.fragment_shop_owner_home, container, false);
     }
 
     @Override
@@ -32,7 +31,7 @@ public class ShopFragment extends Fragment {
 
     void initLogoutButton()
     {
-        Button logoutButton = getView().findViewById(R.id.shop_logout_button);
+        Button logoutButton = getView().findViewById(R.id.shop_owner_home_logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

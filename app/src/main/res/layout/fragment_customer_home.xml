@@ -9,7 +9,7 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/shop_logout_button"
+        android:id="@+id/customer_home_logout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="log out"/>
