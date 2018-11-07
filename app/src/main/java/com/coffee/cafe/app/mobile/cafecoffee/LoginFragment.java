@@ -1,16 +1,21 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +45,19 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+        }
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0);
+        }
 
         Button skipButton = getView().findViewById(R.id.login_skip_button);
         skipButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +95,7 @@ public class LoginFragment extends Fragment {
     void initLoginButton()
     {
         Button loginButton = getView().findViewById(R.id.login_login_button);
+        final ProgressBar progressBar = getView().findViewById(R.id.login_progress_bar);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +108,7 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getContext(), "some field is empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                progressBar.setVisibility(View.VISIBLE);
                 fbAuth.signInWithEmailAndPassword(emailStr, passwordStr)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -128,6 +148,7 @@ public class LoginFragment extends Fragment {
                                             }
                                             else
                                             {
+                                                progressBar.setVisibility(View.GONE);
                                                 Log.d("cafe", "get user error : " + task.getException());
                                                 Toast.makeText(getContext(), "Error : " + task.getException(), Toast.LENGTH_SHORT).show();
                                             }
@@ -136,6 +157,7 @@ public class LoginFragment extends Fragment {
                         }
                         else
                         {
+                            progressBar.setVisibility(View.GONE);
                             Log.d("cafe", "login error : " + task.getException());
                             try
                             {

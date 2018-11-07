@@ -3,55 +3,134 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/register_back_button"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="back"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <Button
+                android:id="@+id/register_back_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="back"/>
 
-        <Button
-            android:id="@+id/register_customer_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="customer"
-            android:background="#FFFF00"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/register_shop_owner_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="shop owner"
-            android:background="#DDDDDD"/>
-    </LinearLayout>
+                <Button
+                    android:id="@+id/register_customer_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="customer"
+                    android:background="#FFFF00"/>
 
-    <EditText
-        android:id="@+id/register_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="email"/>
+                <Button
+                    android:id="@+id/register_shop_owner_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="shop owner"
+                    android:background="#DDDDDD"/>
+            </LinearLayout>
 
-    <EditText
-        android:id="@+id/register_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="username"/>
+            <EditText
+                android:id="@+id/register_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="email"/>
 
-    <EditText
-        android:id="@+id/register_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="password"/>
+            <EditText
+                android:id="@+id/register_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="username"/>
 
-    <Button
-        android:id="@+id/register_register_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="register"/>
+            <EditText
+                android:id="@+id/register_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="password"/>
+
+            <TextView
+                android:text="profile picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/register_selected_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/register_camera_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="open camera"/>
+
+            <Button
+                android:id="@+id/register_choose_picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="choose picture"/>
+
+            <LinearLayout
+                android:id="@+id/register_shop_owner_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/register_shop_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Shop name"/>
+
+                <EditText
+                    android:id="@+id/register_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="location"/>
+
+                <ImageView
+                    android:id="@+id/register_shop_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/register_shop_camera_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="open camera"/>
+
+                <Button
+                    android:id="@+id/register_shop_choose_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="choose picture"/>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/register_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/register_register_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="register"/>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

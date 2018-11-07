@@ -6,6 +6,7 @@ public class User implements Serializable {
     private String email;
     private String username;
     private String type;
+    private String pictureName;
 
     public User()
     {
@@ -41,5 +42,13 @@ public class User implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getPictureName() {
+        return pictureName;
+    }
+
+    public void setPictureName(String pictureName) {
+        this.pictureName = pictureName;
     }
 }

@@ -27,6 +27,13 @@
         android:layout_height="wrap_content"
         android:hint="password"/>
 
+    <ProgressBar
+        android:id="@+id/login_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
     <Button
         android:id="@+id/login_login_button"
         android:layout_width="match_parent"
