@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- just using this to keep variable. don't remove it-->
+        <TextView
+            android:id="@+id/option_size_keeper"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:text="normal"/>
+
+        <TextView
+            android:text="Size : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/option_size_normal_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="normal"
+            android:background="#FFFF00" />
+
+        <Button
+            android:id="@+id/option_size_big_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="big"
+            android:background="#DDDDDD"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- just using this to keep variable. don't remove it-->
+        <TextView
+            android:id="@+id/option_type_keeper"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:text="hot"/>
+
+        <TextView
+            android:text="Type : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/option_hot_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hot"
+            android:background="#FFFF00"/>
+
+        <Button
+            android:id="@+id/option_cold_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cold"
+            android:background="#DDDDDD"/>
+
+        <Button
+            android:id="@+id/option_frappe_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="frappe"
+            android:background="#DDDDDD"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="Amount : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/option_decrease_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"/>
+
+        <TextView
+            android:id="@+id/option_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"/>
+
+        <Button
+            android:id="@+id/option_increase_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/option_more_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="More Detail..."/>
+
+    <TextView
+        android:id="@+id/option_price"
+        android:text="Price : "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/option_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add"/>
+
+</LinearLayout>

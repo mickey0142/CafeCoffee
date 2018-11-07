@@ -34,22 +34,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <LinearLayout
+                <include
                     android:id="@+id/shop_cappuccino_option"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-                    <TextView
-                        android:text="eieieieiei"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                    <Button
-                        android:id="@+id/shop_cappuccino_add_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="add"/>
-                </LinearLayout>
+                    layout="@layout/fragment_beverage_option"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 

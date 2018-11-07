@@ -1,6 +1,7 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
 import android.animation.Animator;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,14 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import Model.Beverage;
-import Model.Condiment;
 import Model.Order;
 import Model.Shop;
 import Model.User;
@@ -73,25 +75,25 @@ public class ShopFragment extends Fragment {
         });
     }
 
-    void initCappuccino()
+    void setMenuClickAnimation(int mainLayoutId, final int optionLayoutId)
     {
-        LinearLayout cappuccinoLayout = getView().findViewById(R.id.shop_cappuccino);
-        cappuccinoLayout.setOnClickListener(new View.OnClickListener() {
+        final LinearLayout mainLayout = getView().findViewById(mainLayoutId);
+        mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final LinearLayout cappuccinoOption = getView().findViewById(R.id.shop_cappuccino_option);
-                if (cappuccinoOption.getVisibility() == View.GONE)
+                final LinearLayout optionLayout = getView().findViewById(optionLayoutId);
+                if (optionLayout.getVisibility() == View.GONE)
                 {
-                    cappuccinoOption.setAlpha(0f);
-                    cappuccinoOption.setVisibility(View.VISIBLE);
-                    cappuccinoOption.animate()
+                    optionLayout.setAlpha(0f);
+                    optionLayout.setVisibility(View.VISIBLE);
+                    optionLayout.animate()
                             .alpha(1f)
                             .setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
                             .setListener(null);
                 }
-                else if (cappuccinoOption.getVisibility() == View.VISIBLE)
+                else if (optionLayout.getVisibility() == View.VISIBLE)
                 {
-                    cappuccinoOption.animate()
+                    optionLayout.animate()
                             .alpha(0f)
                             .setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
                             .setListener(new Animator.AnimatorListener() {
@@ -102,7 +104,7 @@ public class ShopFragment extends Fragment {
 
                                 @Override
                                 public void onAnimationEnd(Animator animation) {
-                                    cappuccinoOption.setVisibility(View.GONE);
+                                    optionLayout.setVisibility(View.GONE);
                                 }
 
                                 @Override
@@ -118,20 +120,159 @@ public class ShopFragment extends Fragment {
                 }
             }
         });
-        Button cappuccinoAddButton = getView().findViewById(R.id.shop_cappuccino_add_button);
-        cappuccinoAddButton.setOnClickListener(new View.OnClickListener() {
+    }
+
+    void initOption(int layoutId, String type)
+    {
+        final String coffeeType = type;
+        final Beverage beverage = new Beverage(coffeeType);
+        beverage.setSize("small");
+        beverage.setType("hot");
+        beverage.setAmount(1);
+        LinearLayout linearLayout = getView().findViewById(layoutId);
+        final TextView price = linearLayout.findViewById(R.id.option_price);
+        String priceStr = "Price : " + beverage.getPrice();
+        if (beverage.getAmount() > 1)
+        {
+            priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+        }
+        price.setText(priceStr);
+
+        final Button normalButton = linearLayout.findViewById(R.id.option_size_normal_button);
+        final Button bigButton = linearLayout.findViewById(R.id.option_size_big_button);
+        normalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Beverage beverage = new Beverage("Cappuccino");
-                beverage.setAmount(1);// set amount here later
-                Condiment condiment = new Condiment("Whip");
-                condiment.setAmount(1);
-                beverage.addCondiment(condiment);
+                normalButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                bigButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                beverage.setSize("normal");
+                String priceStr = "Price : " + beverage.getPrice();
+                if (beverage.getAmount() > 1)
+                {
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                }
+                price.setText(priceStr);
+            }
+        });
+        bigButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                normalButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                bigButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                beverage.setSize("big");
+                String priceStr = "Price : " + beverage.getPrice();
+                if (beverage.getAmount() > 1)
+                {
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                }
+                price.setText(priceStr);
+            }
+        });
+
+        final Button hotButton = linearLayout.findViewById(R.id.option_hot_button);
+        final Button coldButton = linearLayout.findViewById(R.id.option_cold_button);
+        final Button frappeButton = linearLayout.findViewById(R.id.option_frappe_button);
+        hotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hotButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                coldButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                frappeButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                beverage.setType("hot");
+                String priceStr = "Price : " + beverage.getPrice();
+                if (beverage.getAmount() > 1)
+                {
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                }
+                price.setText(priceStr);
+            }
+        });
+        coldButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hotButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                coldButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                frappeButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                beverage.setType("cold");
+                String priceStr = "Price : " + beverage.getPrice();
+                if (beverage.getAmount() > 1)
+                {
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                }
+                price.setText(priceStr);
+            }
+        });
+        frappeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hotButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                coldButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                frappeButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                beverage.setType("frappe");
+                String priceStr = "Price : " + beverage.getPrice();
+                if (beverage.getAmount() > 1)
+                {
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                }
+                price.setText(priceStr);
+            }
+        });
+
+        final TextView amount = linearLayout.findViewById(R.id.option_amount);
+        Button increaseButton = linearLayout.findViewById(R.id.option_increase_amount);
+        Button decreaseButton = linearLayout.findViewById(R.id.option_decrease_amount);
+        increaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int num = Integer.parseInt(amount.getText().toString());
+                num += 1;
+                amount.setText(num+"");
+                beverage.setAmount(Integer.parseInt(amount.getText().toString()));
+                String priceStr = "Price : " + beverage.getPrice();
+                if (beverage.getAmount() > 1)
+                {
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                }
+                price.setText(priceStr);
+            }
+        });
+        decreaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int num = Integer.parseInt(amount.getText().toString());
+                if (num > 1 )
+                {
+                    num -= 1;
+                }
+                amount.setText(num+"");
+                beverage.setAmount(Integer.parseInt(amount.getText().toString()));
+                String priceStr = "Price : " + beverage.getPrice();
+                if (beverage.getAmount() > 1)
+                {
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                }
+                price.setText(priceStr);
+            }
+        });
+
+        final EditText moreDetail = linearLayout.findViewById(R.id.option_more_detail);
+
+        Button addButton = linearLayout.findViewById(R.id.option_add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                beverage.setMoreDetail(moreDetail.getText().toString());
                 order.addBeverage(beverage);
                 order.setStatus("in queue");
                 order.setCustomerName(user.getUsername());
                 Toast.makeText(getContext(), "Cappuccino added", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    void initCappuccino()
+    {
+        setMenuClickAnimation(R.id.shop_cappuccino, R.id.shop_cappuccino_option);
+        initOption(R.id.shop_cappuccino_option, "Cappuccino");
     }
 }

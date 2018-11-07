@@ -17,11 +17,6 @@
         android:text="abcdef"
         android:layout_marginTop="-20dp"/>
 
-    <ListView
-        android:id="@+id/cart_item_condiment_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
-
     <TextView
         android:id="@+id/cart_item_sum_price"
         android:layout_width="match_parent"
@@ -33,5 +28,23 @@
         android:layout_height="wrap_content"
         android:text="remove"
         android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/cart_item_increase_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"/>
+
+    <Button
+        android:id="@+id/cart_item_decrease_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"/>
+
+    <TextView
+        android:id="@+id/cart_item_more_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="no additional detail"/>
 
 </LinearLayout>

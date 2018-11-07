@@ -1,14 +1,14 @@
 package Model;
 
-import android.util.Log;
+import java.io.Serializable;
 
-import java.util.ArrayList;
-
-public class Beverage {
+public class Beverage implements Serializable{
     private String name;
-    private double price;
+    private int price;
     private int amount;
-    private ArrayList<Condiment> condimentList = new ArrayList<>();;
+    private String size;
+    private String moreDetail;
+    private String type;
 
     public Beverage()
     {
@@ -36,58 +36,32 @@ public class Beverage {
         this.name = name;
     }
 
-    public double getPrice() {
-        return this.price;
+    public int getPrice() {
+        int finalPrice = this.price;
+        if (this.size.equals("big")) finalPrice += 5;
+        if (this.type.equals("cold")) finalPrice += 5;
+        else if (this.type.equals("frappe")) finalPrice += 10;
+        return finalPrice;
     }
 
-    public double getPrice(String type)
+    public int getPrice(String type)
     {
-        if (type.equals("sum"))
+        int finalPrice = this.price;
+        if (this.size.equals("big")) finalPrice += 5;
+        if (this.type.equals("cold")) finalPrice += 5;
+        else if (this.type.equals("frappe")) finalPrice += 10;
+        if (type.equals("total"))
         {
-            double sumPrice = 0;
-            Log.d("cafe", "condiment list size : " + condimentList.size());
-            for (int i = 0; i < condimentList.size(); i++)
-            {
-                sumPrice += condimentList.get(i).getPrice();
-                Log.d("cafe", "condiment price : " + condimentList.get(i).getPrice());
-            }
-            return sumPrice + price;
-        }
-        else if (type.equals("total"))
-        {
-            double sumPrice = 0;
-            for (int i = 0; i < condimentList.size(); i++)
-            {
-                sumPrice += condimentList.get(i).getPrice();
-            }
-            return (sumPrice + price) * amount;
+            return finalPrice * this.amount;
         }
         else
         {
-            return -1;
+            return finalPrice;
         }
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
-    }
-
-    public ArrayList<Condiment> getCondimentList() {
-        return condimentList;
-    }
-
-    public void setCondimentList(ArrayList<Condiment> condiment) {
-        this.condimentList = condiment;
-    }
-
-    public void addCondiment(Condiment condiment)
-    {
-        this.condimentList.add(condiment);
-    }
-
-    public void removeCondiment(int position)
-    {
-        this.condimentList.remove(position);
     }
 
     public int getAmount() {
@@ -96,5 +70,42 @@ public class Beverage {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getMoreDetail() {
+        return moreDetail;
+    }
+
+    public void setMoreDetail(String moreDetail) {
+        this.moreDetail = moreDetail;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void increaseAmount()
+    {
+        this.amount += 1;
+    }
+
+    public void decreaseAmount()
+    {
+        if (amount > 1)
+        {
+            this.amount -= 1;
+        }
     }
 }

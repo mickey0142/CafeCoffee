@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,17 +35,38 @@ public class CartAdapter extends ArrayAdapter {
         TextView name = cartItem.findViewById(R.id.cart_item_name);
         TextView price = cartItem.findViewById(R.id.cart_item_price);
         TextView sumPrice = cartItem.findViewById(R.id.cart_item_sum_price);
-        Beverage beverage = beverages.get(position);
-        Log.d("cafe", "position : " + position);
-        Log.d("cafe", "beverage" + beverage);
-        Log.d("cafe", "name : " + beverage.getName());
-        Log.d("cafe", "amount : " + beverage.getAmount());
-        name.setText(beverage.getName());
+        TextView moreDetail = cartItem.findViewById(R.id.cart_item_more_detail);
+        final Beverage beverage = beverages.get(position);
+        name.setText(beverage.getType() + " " + beverage.getName() + " " + beverage.getSize());
         price.setText(beverage.getPrice()+"");
-        sumPrice.setText("Total Price : " + beverage.getPrice("sum") + " X " + beverage.getAmount() + " = " + beverage.getPrice("total"));
-        ListView condimentList = cartItem.findViewById(R.id.cart_item_condiment_list);
-        CondimentAdapter condimentAdapter = new CondimentAdapter(context, R.layout.fragment_condiment_item, beverage.getCondimentList());
-        condimentList.setAdapter(condimentAdapter);
+        sumPrice.setText("Total Price : " + beverage.getPrice() + " X " + beverage.getAmount() + " = " + beverage.getPrice("total"));
+        moreDetail.setText(beverage.getMoreDetail());
+        Button removeButton = cartItem.findViewById(R.id.cart_item_remove_button);
+        final int pos = position;
+        final CartAdapter temp = this;
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                beverages.remove(pos);
+                temp.notifyDataSetChanged();
+            }
+        });
+        Button increaseButton = cartItem.findViewById(R.id.cart_item_increase_amount);
+        increaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                beverage.increaseAmount();
+                temp.notifyDataSetChanged();
+            }
+        });
+        Button decreaseButton = cartItem.findViewById(R.id.cart_item_decrease_amount);
+        decreaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                beverage.decreaseAmount();
+                temp.notifyDataSetChanged();
+            }
+        });
         return cartItem;
     }
 }

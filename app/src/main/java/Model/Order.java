@@ -39,7 +39,20 @@ public class Order implements Serializable{
     }
 
     public void addBeverage(Beverage beverage){
-        this.beverages.add(beverage);
+        boolean check = false;
+        for (int i = 0; i < beverages.size(); i++)
+        {
+            if (beverage.getName().equals(beverages.get(i).getName()) && beverage.getSize().equals(beverages.get(i).getSize()) && beverage.getMoreDetail().equals(beverages.get(i).getMoreDetail()))
+            {
+                beverages.get(i).setAmount(beverages.get(i).getAmount() + beverage.getAmount());
+                check = true;
+                break;
+            }
+        }
+        if (!check)
+        {
+            this.beverages.add(beverage);
+        }
     }
 
     public void removeBeverage(int position)
