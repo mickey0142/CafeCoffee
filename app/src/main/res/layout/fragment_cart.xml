@@ -12,26 +12,25 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="Shop Page"
+                android:text="cart page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:id="@+id/cart_list"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"></ListView>
+
+            <TextView
+                android:id="@+id/cart_sum_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/customer_home_logout_button"
+                android:id="@+id/cart_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="log out"/>
-
-            <ProgressBar
-                android:id="@+id/customer_home_progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-
-            <ListView
-                android:id="@+id/customer_home_shop_list"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"></ListView>
+                android:text="confirm"/>
 
         </LinearLayout>
     </ScrollView>

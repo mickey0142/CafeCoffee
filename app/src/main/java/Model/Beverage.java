@@ -1,10 +1,13 @@
 package Model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Beverage {
     private String name;
     private double price;
+    private int amount;
     private ArrayList<Condiment> condimentList = new ArrayList<>();;
 
     public Beverage()
@@ -34,12 +37,35 @@ public class Beverage {
     }
 
     public double getPrice() {
-        double sumPrice = 0;
-        for (int i = 0; i < condimentList.size(); i++)
+        return this.price;
+    }
+
+    public double getPrice(String type)
+    {
+        if (type.equals("sum"))
         {
-            sumPrice += condimentList.get(i).getPrice();
+            double sumPrice = 0;
+            Log.d("cafe", "condiment list size : " + condimentList.size());
+            for (int i = 0; i < condimentList.size(); i++)
+            {
+                sumPrice += condimentList.get(i).getPrice();
+                Log.d("cafe", "condiment price : " + condimentList.get(i).getPrice());
+            }
+            return sumPrice + price;
         }
-        return sumPrice + price;
+        else if (type.equals("total"))
+        {
+            double sumPrice = 0;
+            for (int i = 0; i < condimentList.size(); i++)
+            {
+                sumPrice += condimentList.get(i).getPrice();
+            }
+            return (sumPrice + price) * amount;
+        }
+        else
+        {
+            return -1;
+        }
     }
 
     public void setPrice(double price) {
@@ -62,5 +88,13 @@ public class Beverage {
     public void removeCondiment(int position)
     {
         this.condimentList.remove(position);
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

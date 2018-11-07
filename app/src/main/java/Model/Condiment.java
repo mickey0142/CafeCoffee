@@ -4,6 +4,7 @@ public class Condiment{
 
     private String name;
     private double price;
+    private int amount;
 
     public Condiment()
     {
@@ -33,5 +34,18 @@ public class Condiment{
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public double getSumPrice()
+    {
+        return price * amount;
     }
 }
