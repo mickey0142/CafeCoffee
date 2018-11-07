@@ -275,4 +275,38 @@ public class ShopFragment extends Fragment {
         setMenuClickAnimation(R.id.shop_cappuccino, R.id.shop_cappuccino_option);
         initOption(R.id.shop_cappuccino_option, "Cappuccino");
     }
+    void initEspresso()
+    {
+        setMenuClickAnimation(R.id.shop_espresso, R.id.shop_espresso_option);
+        initOption(R.id.shop_espresso_option, "Espresso");
+    }
+    void initAmericano()
+    {
+        setMenuClickAnimation(R.id.shop_americano, R.id.shop_americano_option);
+        initOption(R.id.shop_americano_option, "Americano");
+    }
+
+    void initMacchiato()
+    {
+        setMenuClickAnimation(R.id.shop_macchiato, R.id.shop_macchiato_option);
+        initOption(R.id.shop_macchiato_option, "Macchianto");
+    }
+
+    void initLatte()
+    {
+        setMenuClickAnimation(R.id.shop_latte, R.id.shop_latte_option);
+        initOption(R.id.shop_latte_option, "Latte");
+    }
+
+    void initMocha()
+    {
+        setMenuClickAnimation(R.id.shop_mocha, R.id.shop_mocha_option);
+        initOption(R.id.shop_mocha_option, "Mocha");
+    }
+
+    void initChocco()
+    {
+        setMenuClickAnimation(R.id.shop_choco, R.id.shop_choco_option);
+        initOption(R.id.shop_choco_option, "Chocco");
+    }
 }

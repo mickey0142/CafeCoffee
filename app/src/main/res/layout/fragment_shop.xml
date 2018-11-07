@@ -38,7 +38,96 @@
                     android:id="@+id/shop_cappuccino_option"
                     layout="@layout/fragment_beverage_option"
                     android:visibility="gone"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/shop_espresso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:text="espresso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/shop_espresso_option"
+                    layout="@layout/fragment_beverage_option"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shop_americano"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:text="americano"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/shop_americano_option"
+                    layout="@layout/fragment_beverage_option"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shop_macchiato"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:text="macchiato"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/shop_macchiato_option"
+                    layout="@layout/fragment_beverage_option"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shop_latte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:text="latte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/shop_latte_option"
+                    layout="@layout/fragment_beverage_option"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shop_mocha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:text="mocha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/shop_mocha_option"
+                    layout="@layout/fragment_beverage_option"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shop_choco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:text="choco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/shop_choco_option"
+                    layout="@layout/fragment_beverage_option"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </LinearLayout>
