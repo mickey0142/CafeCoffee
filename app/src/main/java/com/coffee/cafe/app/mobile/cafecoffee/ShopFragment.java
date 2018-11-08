@@ -53,8 +53,32 @@ public class ShopFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        initStatusButton();
         initCartButton();
         initCappuccino();
+        initEspresso();
+        initAmericano();
+        initMacchiato();
+        initLatte();
+        initMocha();
+        initCocoa();
+    }
+
+    void initStatusButton()
+    {
+        Button statusButton = getView().findViewById(R.id.shop_status_button);
+        statusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new StatusFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                fragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, fragment).addToBackStack(null).commit();
+            }
+        });
     }
 
     void initCartButton()
@@ -265,7 +289,7 @@ public class ShopFragment extends Fragment {
                 order.addBeverage(beverage);
                 order.setStatus("in queue");
                 order.setCustomerName(user.getUsername());
-                Toast.makeText(getContext(), "Cappuccino added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), coffeeType + " added", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -289,7 +313,7 @@ public class ShopFragment extends Fragment {
     void initMacchiato()
     {
         setMenuClickAnimation(R.id.shop_macchiato, R.id.shop_macchiato_option);
-        initOption(R.id.shop_macchiato_option, "Macchianto");
+        initOption(R.id.shop_macchiato_option, "Macchiato");
     }
 
     void initLatte()
@@ -304,9 +328,9 @@ public class ShopFragment extends Fragment {
         initOption(R.id.shop_mocha_option, "Mocha");
     }
 
-    void initChocco()
+    void initCocoa()
     {
-        setMenuClickAnimation(R.id.shop_choco, R.id.shop_choco_option);
-        initOption(R.id.shop_choco_option, "Chocco");
+        setMenuClickAnimation(R.id.shop_cocoa, R.id.shop_cocoa_option);
+        initOption(R.id.shop_cocoa_option, "Cocoa");
     }
 }

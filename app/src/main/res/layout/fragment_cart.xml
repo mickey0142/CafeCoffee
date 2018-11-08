@@ -19,12 +19,20 @@
             <ListView
                 android:id="@+id/cart_list"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"></ListView>
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"></ListView>
 
             <TextView
                 android:id="@+id/cart_sum_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <ProgressBar
+                android:id="@+id/cart_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/cart_confirm"

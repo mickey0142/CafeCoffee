@@ -13,6 +13,12 @@
             >
 
             <Button
+                android:id="@+id/shop_status_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="status"/>
+
+            <Button
                 android:id="@+id/shop_cart_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,16 +122,16 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/shop_choco"
+                android:id="@+id/shop_cocoa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:text="choco"
+                    android:text="cocoa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <include
-                    android:id="@+id/shop_choco_option"
+                    android:id="@+id/shop_cocoa_option"
                     layout="@layout/fragment_beverage_option"
                     android:visibility="gone"/>
             </LinearLayout>

@@ -22,9 +22,29 @@ public class Beverage implements Serializable{
         {
             price = 2;
         }
-        else if (type.equals("Latte"))
+        else if (type.equals("Espresso"))
         {
             price = 3;
+        }
+        else if (type.equals("Americano"))
+        {
+            price = 4;
+        }
+        else if (type.equals("Macchiato"))
+        {
+            price = 5;
+        }
+        else if (type.equals("Latte"))
+        {
+            price = 6;
+        }
+        else if (type.equals("Mocha"))
+        {
+            price = 7;
+        }
+        else if (type.equals("Cocoa"))
+        {
+            price = 8;
         }
     }
 

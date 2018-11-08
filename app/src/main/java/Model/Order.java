@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Order implements Serializable{
     private String customerName;
     private String status;
-    private double sumPrice;
+    private int sumPrice;
     private ArrayList<Beverage> beverages = new ArrayList<>();
 
     public Order()
@@ -60,16 +60,16 @@ public class Order implements Serializable{
         this.beverages.remove(position);
     }
 
-    public double getSumPrice() {
+    public int getSumPrice() {
         calculateSumPrice();
         return sumPrice;
     }
 
     public void calculateSumPrice() {
-        double sumPrice = 0;
+        int sumPrice = 0;
         for(int i = 0; i < beverages.size(); i++)
         {
-            sumPrice += beverages.get(i).getPrice();
+            sumPrice += beverages.get(i).getPrice("total");
         }
         this.sumPrice = sumPrice;
     }
