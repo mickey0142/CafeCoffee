@@ -1,6 +1,9 @@
 package Model;
 
+import android.util.Log;
+
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Beverage implements Serializable{
     private String name;
@@ -9,6 +12,14 @@ public class Beverage implements Serializable{
     private String size;
     private String moreDetail;
     private String type;
+
+    public static int cappuccinoPrice;
+    public static int espressoPrice;
+    public static int americanoPrice;
+    public static int macchiatoPrice;
+    public static int lattePrice;
+    public static int mochaPrice;
+    public static int cocoaPrice;
 
     public Beverage()
     {
@@ -20,31 +31,31 @@ public class Beverage implements Serializable{
         name = type;
         if (type.equals("Cappuccino"))
         {
-            price = 2;
+            price = cappuccinoPrice;
         }
         else if (type.equals("Espresso"))
         {
-            price = 3;
+            price = espressoPrice;
         }
         else if (type.equals("Americano"))
         {
-            price = 4;
+            price = americanoPrice;
         }
         else if (type.equals("Macchiato"))
         {
-            price = 5;
+            price = macchiatoPrice;
         }
         else if (type.equals("Latte"))
         {
-            price = 6;
+            price = lattePrice;
         }
         else if (type.equals("Mocha"))
         {
-            price = 7;
+            price = mochaPrice;
         }
         else if (type.equals("Cocoa"))
         {
-            price = 8;
+            price = cocoaPrice;
         }
     }
 
@@ -127,5 +138,16 @@ public class Beverage implements Serializable{
         {
             this.amount -= 1;
         }
+    }
+
+    public static void setMenuPrice(HashMap<String, Integer> menuPrice)
+    {
+        cappuccinoPrice = menuPrice.get("Cappuccino");
+        espressoPrice = menuPrice.get("Espresso");
+        americanoPrice = menuPrice.get("Americano");
+        macchiatoPrice = menuPrice.get("Macchiato");
+        lattePrice = menuPrice.get("Latte");
+        mochaPrice = menuPrice.get("Mocha");
+        cocoaPrice = menuPrice.get("Cocoa");
     }
 }

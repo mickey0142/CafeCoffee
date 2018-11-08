@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Shop implements Serializable{
 
@@ -8,6 +9,7 @@ public class Shop implements Serializable{
     private String owner;
     private String location;
     private String pictureName;
+    private HashMap<String, Integer> menuPrice;
 
     public Shop()
     {
@@ -44,5 +46,24 @@ public class Shop implements Serializable{
 
     public void setPictureName(String pictureName) {
         this.pictureName = pictureName;
+    }
+
+    public HashMap<String, Integer> getMenuPrice() {
+        return menuPrice;
+    }
+
+    public void setMenuPrice(HashMap<String, Integer> menuPrice) {
+        this.menuPrice = menuPrice;
+    }
+
+    public void setDefaultMenuPrice()
+    {
+        this.menuPrice.put("Cappuccino", 20);
+        this.menuPrice.put("Espresso", 20);
+        this.menuPrice.put("Americano", 20);
+        this.menuPrice.put("Macchiato", 20);
+        this.menuPrice.put("Latte", 20);
+        this.menuPrice.put("Mocha", 20);
+        this.menuPrice.put("Cocoa", 20);
     }
 }

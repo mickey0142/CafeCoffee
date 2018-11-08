@@ -40,12 +40,17 @@ public class ShopFragment extends Fragment {
         Bundle bundle = getArguments();
         user = (User) bundle.getSerializable("User object");
         shop = (Shop) bundle.getSerializable("Shop object");
+        Beverage.setMenuPrice(shop.getMenuPrice());
         Log.d("test", "user : " + user);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (container != null)
+        {
+            container.removeAllViews();
+        }
         return inflater.inflate(R.layout.fragment_shop, container, false);
     }
 

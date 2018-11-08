@@ -44,6 +44,10 @@ public class CartFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (container != null)
+        {
+            container.removeAllViews();
+        }
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
@@ -84,9 +88,11 @@ public class CartFragment extends Fragment {
                 order.calculateSumPrice();
                 if (order.getSumPrice() == 0)
                 {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "cart is empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                order.setOrderTime();
                 fbStore.collection("order").add(order)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

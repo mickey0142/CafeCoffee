@@ -366,6 +366,7 @@ public class RegisterFragment extends Fragment {
         shop.setLocation(locationStr);
         shop.setOwner(usernameStr);
         shop.setPictureName(shopPictureName);
+        shop.setDefaultMenuPrice();
         final ProgressBar progressBar = getView().findViewById(R.id.register_progress_bar);
         fbStore.collection("shop").document(shopNameStr).set(shop)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

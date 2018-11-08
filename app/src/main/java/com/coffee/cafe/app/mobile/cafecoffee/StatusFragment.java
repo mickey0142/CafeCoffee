@@ -45,6 +45,10 @@ public class StatusFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (container != null)
+        {
+            container.removeAllViews();
+        }
         return inflater.inflate(R.layout.fragment_status, container, false);
     }
 
@@ -76,9 +80,18 @@ public class StatusFragment extends Fragment {
                                 Order doc = document.toObject(Order.class);
                                 temp.add(doc);
                             }
-                            order = (ArrayList<Order>) temp.clone();
-                            OrderAdapter orderAdapter = new OrderAdapter(getActivity(), R.layout.fragment_order_item, order);
-                            orderList.setAdapter(orderAdapter);
+                            try
+                            {
+                                order = (ArrayList<Order>) temp.clone();
+                                Log.d("cafe", "from status getactivity : " + getActivity());
+                                OrderAdapter orderAdapter = new OrderAdapter(getActivity(), R.layout.fragment_order_item, order);
+                                orderList.setAdapter(orderAdapter);
+                            }
+                            catch (NullPointerException ex)
+                            {
+                                Log.d("cafe", "catch NullPointerException" + ex.getMessage());
+
+                            }
                             Log.d("cafe", "data changed");
                         }
                     }
