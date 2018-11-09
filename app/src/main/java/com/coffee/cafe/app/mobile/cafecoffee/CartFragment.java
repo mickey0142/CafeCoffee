@@ -21,7 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import Adapter.CartAdapter;
 import Model.Order;
+import Model.Shop;
 import Model.User;
 
 public class CartFragment extends Fragment {
@@ -29,6 +31,7 @@ public class CartFragment extends Fragment {
     FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fbStore = FirebaseFirestore.getInstance();
     User user;
+    Shop shop;
     Order order = new Order();
 
     @Override
@@ -38,6 +41,7 @@ public class CartFragment extends Fragment {
         Bundle bundle = getArguments();
         user = (User) bundle.getSerializable("User object");
         order = (Order) bundle.getSerializable("Order object");
+        shop = (Shop) bundle.getSerializable("Shop object");
         Log.d("test", "user : " + user);
     }
 
@@ -97,11 +101,14 @@ public class CartFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        // get auto genereated id from documentReference here add update the that
+                        // document again to save id into object
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "order success", Toast.LENGTH_SHORT).show();
                         Fragment fragment = new StatusFragment();
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("User object", user);
+                        bundle.putSerializable("Shop object", shop);
                         fragment.setArguments(bundle);
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

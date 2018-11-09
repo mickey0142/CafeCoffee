@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/update_status_customer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="name"/>
+
+    <TextView
+        android:id="@+id/update_status_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="status"/>
+
+    <TextView
+        android:id="@+id/update_status_order_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="order time"/>
+
+    <ListView
+        android:id="@+id/update_status_beverage_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+    <TextView
+        android:id="@+id/update_status_sum_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sum price"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/update_status_in_queue_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="in queue"/>
+
+        <Button
+            android:id="@+id/update_status_in_progress_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="in progress"/>
+
+        <Button
+            android:id="@+id/update_status_done_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="done"/>
+
+        <Button
+            android:id="@+id/update_status_paid_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="paid"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/update_status_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/update_status_update_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="update"/>
+
+</LinearLayout>

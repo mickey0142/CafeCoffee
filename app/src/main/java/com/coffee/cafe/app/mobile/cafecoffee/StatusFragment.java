@@ -9,11 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,7 +20,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import Adapter.OrderAdapter;
 import Model.Order;
+import Model.Shop;
 import Model.User;
 
 public class StatusFragment extends Fragment {
@@ -31,6 +30,7 @@ public class StatusFragment extends Fragment {
     FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fbStore = FirebaseFirestore.getInstance();
     User user;
+    Shop shop;
     ArrayList<Order> order = new ArrayList<>();
 
     @Override
@@ -39,6 +39,7 @@ public class StatusFragment extends Fragment {
         this.setRetainInstance(true);
         Bundle bundle = getArguments();
         user = (User) bundle.getSerializable("User object");
+        shop = (Shop) bundle.getSerializable("Shop object");
         Log.d("test", "user : " + user);
     }
 
@@ -62,7 +63,7 @@ public class StatusFragment extends Fragment {
     void initOrderList()
     {
         final ListView orderList = getView().findViewById(R.id.status_order_list);
-        fbStore.collection("order").whereEqualTo("customerName", user.getUsername())
+        fbStore.collection("order").whereEqualTo("shopName", shop.getShopName()).whereEqualTo("customerName", user.getUsername())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@javax.annotation.Nullable QuerySnapshot documentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {

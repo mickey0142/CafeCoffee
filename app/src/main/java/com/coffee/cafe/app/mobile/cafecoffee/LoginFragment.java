@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import Model.Shop;
 import Model.User;
 
 public class LoginFragment extends Fragment {
@@ -123,7 +124,7 @@ public class LoginFragment extends Fragment {
                                             {
                                                 for (QueryDocumentSnapshot document : task.getResult())
                                                 {
-                                                    User user = document.toObject(User.class);
+                                                    final User user = document.toObject(User.class);
                                                     if (user.getType().equals("customer"))
                                                     {
                                                         Bundle bundle = new Bundle();
@@ -136,13 +137,27 @@ public class LoginFragment extends Fragment {
                                                     }
                                                     else if (user.getType().equals("shopOwner"))
                                                     {
-                                                        Bundle bundle = new Bundle();
-                                                        bundle.putSerializable("User object", user);
-                                                        Fragment homeFragment = new ShopOwnerHomeFragment();
-                                                        homeFragment.setArguments(bundle);
-                                                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                                                        ft.replace(R.id.main_view, homeFragment).commit();
+                                                        fbStore.collection("shop").whereEqualTo("owner", user.getUsername()).get()
+                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                        if (task.isSuccessful())
+                                                                        {
+                                                                            for (QueryDocumentSnapshot document : task.getResult())
+                                                                            {
+                                                                                Shop shop = document.toObject(Shop.class);
+                                                                                Bundle bundle = new Bundle();
+                                                                                bundle.putSerializable("User object", user);
+                                                                                bundle.putSerializable("Shop object", shop);
+                                                                                Fragment homeFragment = new ShopOwnerHomeFragment();
+                                                                                homeFragment.setArguments(bundle);
+                                                                                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                                                                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                                                                ft.replace(R.id.main_view, homeFragment).commit();
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                });
                                                     }
                                                 }
                                             }

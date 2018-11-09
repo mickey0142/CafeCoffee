@@ -13,6 +13,7 @@ public class Order implements Serializable{
     private int sumPrice;
     private ArrayList<Beverage> beverages = new ArrayList<>();
     private String orderTime;
+    private String shopName;
 
     public Order()
     {
@@ -96,5 +97,13 @@ public class Order implements Serializable{
         temp += orderTime.substring(0, 4);
         temp += orderTime.substring(10, 19);
         return temp;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 }

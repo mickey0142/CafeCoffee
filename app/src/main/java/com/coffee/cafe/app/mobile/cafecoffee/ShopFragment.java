@@ -78,6 +78,7 @@ public class ShopFragment extends Fragment {
                 Fragment fragment = new StatusFragment();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("User object", user);
+                bundle.putSerializable("Shop object", shop);
                 fragment.setArguments(bundle);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -96,6 +97,7 @@ public class ShopFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Order object", order);
                 bundle.putSerializable("User object", user);
+                bundle.putSerializable("Shop object", shop);
                 fragment.setArguments(bundle);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
