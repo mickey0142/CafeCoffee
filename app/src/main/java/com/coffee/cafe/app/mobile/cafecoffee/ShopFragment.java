@@ -157,7 +157,7 @@ public class ShopFragment extends Fragment {
     {
         final String coffeeType = type;
         final Beverage beverage = new Beverage(coffeeType);
-        beverage.setSize("small");
+        beverage.setSize("normal");
         beverage.setType("hot");
         beverage.setAmount(1);
         LinearLayout linearLayout = getView().findViewById(layoutId);

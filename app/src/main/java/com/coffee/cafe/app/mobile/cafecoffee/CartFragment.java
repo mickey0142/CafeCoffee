@@ -90,6 +90,7 @@ public class CartFragment extends Fragment {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 order.calculateSumPrice();
+                order.setShopName(shop.getShopName());
                 if (order.getSumPrice() == 0)
                 {
                     progressBar.setVisibility(View.GONE);

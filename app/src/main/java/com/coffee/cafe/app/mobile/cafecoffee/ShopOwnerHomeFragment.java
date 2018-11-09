@@ -124,6 +124,8 @@ public class ShopOwnerHomeFragment extends Fragment {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("User object", user);
+                                bundle.putSerializable("Order object", orders.get(position));
+                                bundle.putSerializable("Shop object", shop);
                                 Fragment homeFragment = new UpdateStatusFragment();
                                 homeFragment.setArguments(bundle);
                                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();

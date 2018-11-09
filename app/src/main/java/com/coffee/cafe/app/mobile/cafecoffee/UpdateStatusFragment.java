@@ -92,6 +92,7 @@ public class UpdateStatusFragment extends Fragment {
 
     void initStatusButton()
     {
+        setButtonColor();
         final Button inQueueButton = getView().findViewById(R.id.update_status_in_queue_button);
         final Button inProgressButton = getView().findViewById(R.id.update_status_in_progress_button);
         final Button doneButton = getView().findViewById(R.id.update_status_done_button);
@@ -134,28 +135,28 @@ public class UpdateStatusFragment extends Fragment {
         final Button paidButton = getView().findViewById(R.id.update_status_paid_button);
         if (status.equals("in queue"))
         {
-            inQueueButton.setBackgroundColor(Color.parseColor("FFFF00"));
+            inQueueButton.setBackgroundColor(Color.parseColor("#FFFF00"));
             inProgressButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             doneButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             paidButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }
         else if (status.equals("in progress"))
         {
-            inQueueButton.setBackgroundColor(Color.parseColor("DDDDDD"));
+            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             inProgressButton.setBackgroundColor(Color.parseColor("#FFFF00"));
             doneButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             paidButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }
         else if (status.equals("done"))
         {
-            inQueueButton.setBackgroundColor(Color.parseColor("DDDDDD"));
+            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             inProgressButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             doneButton.setBackgroundColor(Color.parseColor("#FFFF00"));
             paidButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }
         else if (status.equals("paid"))
         {
-            inQueueButton.setBackgroundColor(Color.parseColor("DDDDDD"));
+            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             inProgressButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             doneButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             paidButton.setBackgroundColor(Color.parseColor("#FFFF00"));
@@ -165,64 +166,71 @@ public class UpdateStatusFragment extends Fragment {
     void initUpdateButton()
     {
         final ProgressBar progressBar = getView().findViewById(R.id.update_status_progress_bar);
-        progressBar.setVisibility(View.VISIBLE);
-        fbStore.collection("order").whereEqualTo("orderTime", "").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful())
-                        {
-                            for (QueryDocumentSnapshot document : task.getResult())
-                            {
-                                Log.d("cafe", "document id : " + document.getId());
-                                if (status.equals("paid"))
+        Button updateButton = getView().findViewById(R.id.update_status_update_button);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                fbStore.collection("order").whereEqualTo("orderTime", order.getOrderTime()).get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful())
                                 {
-                                    fbStore.collection("order").document(document.getId()).delete()
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    Log.d("cafe", "get data from order success + " + task.getResult().isEmpty());
+                                    for (QueryDocumentSnapshot document : task.getResult())
+                                    {
+                                        Log.d("cafe", "document id : " + document.getId());
+                                        if (status.equals("paid"))
+                                        {
+                                            fbStore.collection("order").document(document.getId()).delete()
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Toast.makeText(getContext(), "update success", Toast.LENGTH_SHORT).show();
+                                                            Log.d("cafe", "delete success");
+                                                            getFragmentManager().popBackStack();
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Toast.makeText(getContext(), "update success", Toast.LENGTH_SHORT).show();
-                                                    Log.d("cafe", "delete success");
-                                                    getFragmentManager().popBackStack();
+                                                public void onFailure(@NonNull Exception e) {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(getContext(), "update error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Log.d("cafe", "delete error : " + e.getMessage());
                                                 }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            progressBar.setVisibility(View.GONE);
-                                            Toast.makeText(getContext(), "update error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            Log.d("cafe", "delete error : " + e.getMessage());
+                                            });
                                         }
-                                    });
+                                        else
+                                        {
+                                            order.setStatus(status);
+                                            fbStore.collection("order").document(document.getId()).set(order)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Toast.makeText(getContext(), "update success", Toast.LENGTH_SHORT).show();
+                                                            Log.d("cafe", "update success");
+                                                            getFragmentManager().popBackStack();
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(getContext(), "update error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Log.d("cafe", "update error : " + e.getMessage());
+                                                }
+                                            });
+                                        }
+                                    }
                                 }
                                 else
                                 {
-                                    order.setStatus(status);
-                                    fbStore.collection("order").document(document.getId()).set(order)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Toast.makeText(getContext(), "update success", Toast.LENGTH_SHORT).show();
-                                                    Log.d("cafe", "update success");
-                                                    getFragmentManager().popBackStack();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            progressBar.setVisibility(View.GONE);
-                                            Toast.makeText(getContext(), "update error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                            Log.d("cafe", "update error : " + e.getMessage());
-                                        }
-                                    });
+                                    progressBar.setVisibility(View.GONE);
+                                    Log.d("cafe", "get order before delete error : " + task.getException());
+                                    Toast.makeText(getContext(), "Error : " + task.getException(), Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        }
-                        else
-                        {
-                            progressBar.setVisibility(View.GONE);
-                            Log.d("cafe", "get order before delete error : " + task.getException());
-                            Toast.makeText(getContext(), "Error : " + task.getException(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                        });
+            }
+        });
     }
 }

@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -64,7 +65,7 @@ public class StatusFragment extends Fragment {
     {
         final ListView orderList = getView().findViewById(R.id.status_order_list);
         fbStore.collection("order").whereEqualTo("shopName", shop.getShopName()).whereEqualTo("customerName", user.getUsername())
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                .orderBy("orderTime", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@javax.annotation.Nullable QuerySnapshot documentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                         if (e != null)
