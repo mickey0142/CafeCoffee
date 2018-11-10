@@ -1,5 +1,7 @@
 package Model;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -10,6 +12,7 @@ public class Shop implements Serializable{
     private String location;
     private String pictureName;
     private HashMap<String, Integer> menuPrice;
+    private HashMap<String, Double> shopPosition;
 
     public Shop()
     {
@@ -56,8 +59,17 @@ public class Shop implements Serializable{
         this.menuPrice = menuPrice;
     }
 
+    public HashMap<String, Double> getShopPosition() {
+        return shopPosition;
+    }
+
+    public void setShopPosition(HashMap<String, Double> shopPosition) {
+        this.shopPosition = shopPosition;
+    }
+
     public void setDefaultMenuPrice()
     {
+        menuPrice = new HashMap<>();
         this.menuPrice.put("Cappuccino", 20);
         this.menuPrice.put("Espresso", 20);
         this.menuPrice.put("Americano", 20);

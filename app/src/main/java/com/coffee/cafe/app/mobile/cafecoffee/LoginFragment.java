@@ -69,6 +69,10 @@ public class LoginFragment extends Fragment {
         {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0);
         }
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
 
         Button skipButton = getView().findViewById(R.id.login_skip_button);
         skipButton.setOnClickListener(new View.OnClickListener() {

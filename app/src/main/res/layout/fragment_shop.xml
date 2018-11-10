@@ -136,6 +136,12 @@
                     android:visibility="gone"/>
             </LinearLayout>
 
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/shop_map_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                />
+
         </LinearLayout>
     </ScrollView>
 

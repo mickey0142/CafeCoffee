@@ -2,6 +2,7 @@ package com.coffee.cafe.app.mobile.cafecoffee;
 
 import android.animation.Animator;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,6 +45,9 @@ public class ShopFragment extends Fragment {
     User user;
     Shop shop;
     Order order = new Order();
+    MapView mapView;
+    private GoogleMap googleMap;
+    FusedLocationProviderClient fusedLocationClient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +58,7 @@ public class ShopFragment extends Fragment {
         shop = (Shop) bundle.getSerializable("Shop object");
         Beverage.setMenuPrice(shop.getMenuPrice());
         Log.d("test", "user : " + user);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
     }
 
     @Nullable
@@ -67,6 +84,7 @@ public class ShopFragment extends Fragment {
         initLatte();
         initMocha();
         initCocoa();
+        initMapView(savedInstanceState);
     }
 
     void initStatusButton()
@@ -339,5 +357,47 @@ public class ShopFragment extends Fragment {
     {
         setMenuClickAnimation(R.id.shop_cocoa, R.id.shop_cocoa_option);
         initOption(R.id.shop_cocoa_option, "Cocoa");
+    }
+
+    void initMapView(Bundle savedInstanceState)
+    {
+        mapView = getView().findViewById(R.id.shop_map_view);
+        mapView.onCreate(savedInstanceState);
+        mapView.onResume();
+
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap mMap) {
+                googleMap = mMap;
+
+                try
+                {
+                    googleMap.setMyLocationEnabled(false);
+                    LatLng shopPosition = new LatLng(shop.getShopPosition().get("latitude"), shop.getShopPosition().get("longitude"));
+                    googleMap.addMarker(new MarkerOptions().position(shopPosition).title("shop is here"));
+
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(shopPosition).zoom(15).build();
+                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                }
+                catch (SecurityException e)
+                {
+                    Log.d("cafe", "location permission not granted : " +e.getMessage());
+                    Toast.makeText(getContext(), "location permission not granted Error : " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    mapView.setVisibility(View.GONE);
+                }
+                catch (NullPointerException e)
+                {
+                    Log.d("cafe", "catch NullPointerException : " + e.getMessage());
+                    Toast.makeText(getContext(), "can't get shop location" + e.getMessage(), Toast.LENGTH_LONG).show();
+                    mapView.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }

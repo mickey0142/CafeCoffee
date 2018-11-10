@@ -38,4 +38,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
+    <ProgressBar
+        android:id="@+id/shop_owner_home_progress_bar_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/shop_owner_home_set_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="set current position as shop location"/>
+
 </LinearLayout>
