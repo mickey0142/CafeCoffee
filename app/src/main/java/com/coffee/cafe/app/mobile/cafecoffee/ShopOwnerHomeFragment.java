@@ -64,6 +64,7 @@ public class ShopOwnerHomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         initWelcomeText();
+        initEditPriceButton();
         initLogoutButton();
         initOrderList();
     }
@@ -72,6 +73,24 @@ public class ShopOwnerHomeFragment extends Fragment {
     {
         TextView welcomeText = getView().findViewById(R.id.shop_owner_home_welcome_text);
         welcomeText.setText("Shop " + shop.getShopName() + " Welcome " + shop.getOwner());
+    }
+
+    void initEditPriceButton()
+    {
+        Button editPriceButton = getView().findViewById(R.id.shop_owner_home_edit_price_button);
+        editPriceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                bundle.putSerializable("Shop object", shop);
+                Fragment fragment = new EditPriceFragment();
+                fragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, fragment).addToBackStack(null).commit();
+            }
+        });
     }
 
     void initLogoutButton()
@@ -84,7 +103,7 @@ public class ShopOwnerHomeFragment extends Fragment {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.main_view, new LoginFragment())
-                        .addToBackStack(null).commit();
+                        .commit();
             }
         });
     }
@@ -126,11 +145,11 @@ public class ShopOwnerHomeFragment extends Fragment {
                                 bundle.putSerializable("User object", user);
                                 bundle.putSerializable("Order object", orders.get(position));
                                 bundle.putSerializable("Shop object", shop);
-                                Fragment homeFragment = new UpdateStatusFragment();
-                                homeFragment.setArguments(bundle);
+                                Fragment fragment = new UpdateStatusFragment();
+                                fragment.setArguments(bundle);
                                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                                ft.replace(R.id.main_view, homeFragment).addToBackStack(null).commit();
+                                ft.replace(R.id.main_view, fragment).addToBackStack(null).commit();
                             }
                         });
 

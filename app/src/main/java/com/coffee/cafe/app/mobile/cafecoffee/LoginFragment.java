@@ -1,21 +1,27 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +46,10 @@ public class LoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (container != null)
+        {
+            container.removeAllViews();
+        }
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
@@ -89,8 +99,25 @@ public class LoginFragment extends Fragment {
                 ft.replace(R.id.main_view, homeFragment).commit();
             }
         });
+        initEnterPressed();
         initLoginButton();
         initRegisterButton();
+        clearBackStack();
+    }
+
+    void initEnterPressed()
+    {
+        EditText password = getView().findViewById(R.id.login_password);
+        password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    Log.d("cafe","Enter pressed");
+                    Button loginButton = getView().findViewById(R.id.login_login_button);
+                    loginButton.performClick();
+                }
+                return false;
+            }
+        });
     }
 
     void initLoginButton()
@@ -100,6 +127,8 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
                 EditText email = getView().findViewById(R.id.login_email);
                 EditText password = getView().findViewById(R.id.login_password);
                 final String emailStr = email.getText().toString();
@@ -224,5 +253,14 @@ public class LoginFragment extends Fragment {
                         .addToBackStack(null).commit();
             }
         });
+    }
+
+    void clearBackStack()
+    {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        if (manager.getBackStackEntryCount() > 0) {
+            FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
+            manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 }

@@ -46,6 +46,10 @@ public class CustomerHomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (container != null)
+        {
+            container.removeAllViews();
+        }
         return inflater.inflate(R.layout.fragment_customer_home, container, false);
     }
 
@@ -67,7 +71,7 @@ public class CustomerHomeFragment extends Fragment {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.main_view, new LoginFragment())
-                        .addToBackStack(null).commit();
+                        .commit();
             }
         });
     }

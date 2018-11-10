@@ -20,6 +20,12 @@
         android:layout_height="wrap_content"
         android:text="log out"/>
 
+    <Button
+        android:id="@+id/shop_owner_home_edit_price_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="edit price"/>
+
     <ProgressBar
         android:id="@+id/shop_owner_home_progress_bar"
         android:layout_width="match_parent"
