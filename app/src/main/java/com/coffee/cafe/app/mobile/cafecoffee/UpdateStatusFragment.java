@@ -2,6 +2,7 @@ package com.coffee.cafe.app.mobile.cafecoffee;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,7 +27,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import Adapter.BeverageAdapter;
+import Model.Beverage;
 import Model.Order;
 import Model.Shop;
 import Model.User;
@@ -97,10 +105,13 @@ public class UpdateStatusFragment extends Fragment {
         final Button inProgressButton = getView().findViewById(R.id.update_status_in_progress_button);
         final Button doneButton = getView().findViewById(R.id.update_status_done_button);
         final Button paidButton = getView().findViewById(R.id.update_status_paid_button);
+        final CheckBox checkBox = getView().findViewById(R.id.update_status_save_log);
         inQueueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 status = "in queue";
+                checkBox.setVisibility(View.GONE);
+                checkBox.setChecked(false);
                 setButtonColor();
             }
         });
@@ -108,6 +119,8 @@ public class UpdateStatusFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 status = "in progress";
+                checkBox.setVisibility(View.GONE);
+                checkBox.setChecked(false);
                 setButtonColor();
             }
         });
@@ -115,6 +128,8 @@ public class UpdateStatusFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 status = "done";
+                checkBox.setVisibility(View.GONE);
+                checkBox.setChecked(false);
                 setButtonColor();
             }
         });
@@ -122,6 +137,8 @@ public class UpdateStatusFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 status = "paid";
+                checkBox.setVisibility(View.VISIBLE);
+                checkBox.setChecked(true);
                 setButtonColor();
             }
         });
@@ -183,6 +200,8 @@ public class UpdateStatusFragment extends Fragment {
                                         Log.d("cafe", "document id : " + document.getId());
                                         if (status.equals("paid"))
                                         {
+                                            Order order = document.toObject(Order.class);
+                                            saveOrderInTextFile(order);
                                             fbStore.collection("order").document(document.getId()).delete()
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
@@ -232,5 +251,35 @@ public class UpdateStatusFragment extends Fragment {
                         });
             }
         });
+    }
+
+    void saveOrderInTextFile(Order order)
+    {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "Cafe Coffee");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File textFile = new File(root, "saleLog" + shop.getShopName() + ".txt");
+            FileWriter writer = new FileWriter(textFile, true);
+            writer.append("Customer Name : " + order.getCustomerName() + "\n");
+            writer.append("Order Time : " + order.getOrderTime() + "\n");
+            writer.append("Beverage List :\n" );
+            ArrayList<Beverage> beverages = order.getBeverages();
+            for (int i = 0; i < beverages.size(); i++)
+            {
+                writer.append(beverages.get(i).getType() + " " + beverages.get(i).getName() + " " +
+                        beverages.get(i).getSize() + " : " + beverages.get(i).getPrice() + " X " +
+                        beverages.get(i).getAmount() + " = " + beverages.get(i).getPrice("total")
+                        + "\n");
+            }
+            writer.append("Total price : " + order.getSumPrice() + "\n\n");
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("cafe", "write text file error : " + e.getMessage());
+            Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }
