@@ -1,13 +1,19 @@
 package Model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Order implements Serializable{
     private String customerName;
     private String status;
-    private double sumPrice;
+    private int sumPrice;
     private ArrayList<Beverage> beverages = new ArrayList<>();
+    private String orderTime;
+    private String shopName;
 
     public Order()
     {
@@ -60,17 +66,44 @@ public class Order implements Serializable{
         this.beverages.remove(position);
     }
 
-    public double getSumPrice() {
+    public int getSumPrice() {
         calculateSumPrice();
         return sumPrice;
     }
 
     public void calculateSumPrice() {
-        double sumPrice = 0;
+        int sumPrice = 0;
         for(int i = 0; i < beverages.size(); i++)
         {
-            sumPrice += beverages.get(i).getPrice();
+            sumPrice += beverages.get(i).getPrice("total");
         }
         this.sumPrice = sumPrice;
+    }
+
+    public String getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime() {
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        orderTime = dateFormat.format(date);
+    }
+
+    public String orderTimeReverse()
+    {
+        String temp = orderTime.substring(8, 10);
+        temp += orderTime.substring(4, 8);
+        temp += orderTime.substring(0, 4);
+        temp += orderTime.substring(10, 19);
+        return temp;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 }

@@ -1,31 +1,44 @@
-package com.coffee.cafe.app.mobile.cafecoffee;
+package Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import com.coffee.cafe.app.mobile.cafecoffee.R;
 
 import java.util.ArrayList;
 
 import Model.Beverage;
+import Model.Order;
 
 public class CartAdapter extends ArrayAdapter {
 
     Context context;
     ArrayList<Beverage> beverages;
+    Order order;
+    TextView cartPrice;
 
     public CartAdapter(Context context, int  resource, ArrayList<Beverage> objects)
     {
         super(context, resource, objects);
         this.context = context;
         this.beverages = objects;
+    }
+
+    public void setOrder(Order order)
+    {
+        this.order = order;
+    }
+
+    public void setCartPrice(TextView cartPrice)
+    {
+        this.cartPrice = cartPrice;
     }
 
     @NonNull
@@ -48,6 +61,8 @@ public class CartAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 beverages.remove(pos);
+                int num = order.getSumPrice();
+                cartPrice.setText("Total Price : " + num);
                 temp.notifyDataSetChanged();
             }
         });
@@ -56,6 +71,8 @@ public class CartAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 beverage.increaseAmount();
+                int num = order.getSumPrice();
+                cartPrice.setText("Total Price : " + num);
                 temp.notifyDataSetChanged();
             }
         });
@@ -64,6 +81,8 @@ public class CartAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 beverage.decreaseAmount();
+                int num = order.getSumPrice();
+                cartPrice.setText("Total Price : " + num);
                 temp.notifyDataSetChanged();
             }
         });

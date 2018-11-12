@@ -8,10 +8,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/shop_owner_home_welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="welcome"/>
+
     <Button
         android:id="@+id/shop_owner_home_logout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="log out"/>
+
+    <Button
+        android:id="@+id/shop_owner_home_edit_price_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="edit price"/>
+
+    <ProgressBar
+        android:id="@+id/shop_owner_home_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <ListView
+        android:id="@+id/shop_owner_order_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+    <ProgressBar
+        android:id="@+id/shop_owner_home_progress_bar_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/shop_owner_home_set_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="set current position as shop location"/>
 
 </LinearLayout>

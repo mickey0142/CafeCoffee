@@ -1,4 +1,4 @@
-package com.coffee.cafe.app.mobile.cafecoffee;
+package Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.coffee.cafe.app.mobile.cafecoffee.GlideApp;
+import com.coffee.cafe.app.mobile.cafecoffee.R;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 

@@ -12,24 +12,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="Shop Page"
+                android:text="Status Page"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/customer_home_logout_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="log out"/>
-
-            <ProgressBar
-                android:id="@+id/customer_home_progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-
             <ListView
-                android:id="@+id/customer_home_shop_list"
+                android:id="@+id/status_order_list"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:nestedScrollingEnabled="true"></ListView>

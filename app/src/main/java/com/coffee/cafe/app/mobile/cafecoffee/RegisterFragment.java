@@ -1,9 +1,14 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,8 +24,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +40,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.HashMap;
 
 import Model.Shop;
 import Model.User;
@@ -51,16 +64,22 @@ public class RegisterFragment extends Fragment {
     String shopPictureName;
     Uri profilePictureUri;
     Uri shopPictureUri;
+    FusedLocationProviderClient fusedLocationClient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setRetainInstance(true);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (container != null)
+        {
+            container.removeAllViews();
+        }
         return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
@@ -294,19 +313,48 @@ public class RegisterFragment extends Fragment {
         }
         else if (requestCode == OPEN_CAMERA_PROFILE)
         {
-            if (data == null) return;
+            if (resultCode == Activity.RESULT_CANCELED)
+            {
+                return;
+            }
             profilePictureUri = data.getData();
+            String path = GetFilePathFromDevice.getPath(getContext(), profilePictureUri);
             profilePictureName = profilePictureUri.getLastPathSegment();
             ImageView profile = getView().findViewById(R.id.register_selected_image);
-            profile.setImageURI(profilePictureUri);
+            //profile.setImageURI(profilePictureUri);
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 5;
+            Bitmap bmpSample = BitmapFactory.decodeFile(path, options);
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            bmpSample.compress(Bitmap.CompressFormat.JPEG, 1, out);
+            byte[] byteArray = out.toByteArray();
+
+            Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            profile.setImageBitmap(Bitmap.createScaledBitmap(bmp, 700,
+                    700, false));
         }
         else if (requestCode == OPEN_CAMERA_SHOP)
         {
             if (data == null) return;
             shopPictureUri = data.getData();
             shopPictureName = shopPictureUri.getLastPathSegment();
-            ImageView profile = getView().findViewById(R.id.register_selected_image);
-            profile.setImageURI(shopPictureUri);
+            ImageView profile = getView().findViewById(R.id.register_shop_picture);
+            //profile.setImageURI(shopPictureUri);
+
+            String path = GetFilePathFromDevice.getPath(getContext(), shopPictureUri);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 5;
+            Bitmap bmpSample = BitmapFactory.decodeFile(path, options);
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            bmpSample.compress(Bitmap.CompressFormat.JPEG, 1, out);
+            byte[] byteArray = out.toByteArray();
+
+            Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            profile.setImageBitmap(Bitmap.createScaledBitmap(bmp, 700,
+                    700, false));
         }
     }
 
@@ -331,7 +379,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Log.d("cafe", "upload profile picture success");
-                Toast.makeText(getContext(), "upload success", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "upload success", Toast.LENGTH_SHORT).show();
                 if (type.equals("shopOwner"))
                 {
                     uploadShopData();
@@ -357,32 +405,78 @@ public class RegisterFragment extends Fragment {
     {
         EditText shopName = getView().findViewById(R.id.register_shop_name);
         EditText location = getView().findViewById(R.id.register_location);
-        String shopNameStr = shopName.getText().toString();
+        final String shopNameStr = shopName.getText().toString();
         String locationStr = location.getText().toString();
         EditText username = getView().findViewById(R.id.register_username);
         String usernameStr = username.getText().toString();
-        Shop shop = new Shop();
+        final Shop shop = new Shop();
         shop.setShopName(shopNameStr);
         shop.setLocation(locationStr);
         shop.setOwner(usernameStr);
         shop.setPictureName(shopPictureName);
-        final ProgressBar progressBar = getView().findViewById(R.id.register_progress_bar);
-        fbStore.collection("shop").document(shopNameStr).set(shop)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("cafe", "add shop success");
-                        Toast.makeText(getContext(), "add shop success", Toast.LENGTH_SHORT).show();
-                        uploadShopPicture();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.GONE);
-                Log.d("cafe", "add shop error : " + e.getMessage());
-                Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        shop.setDefaultMenuPrice();
+        try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try{
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null)
+                            {
+                                HashMap<String, Double> shopPosition = new HashMap<>();
+                                shopPosition.put("latitude", location.getLatitude());
+                                shopPosition.put("longitude", location.getLongitude());
+                                shop.setShopPosition(shopPosition);
+                            }
+                            else
+                            {
+                                Log.d("cafe", "location is null in register");
+                                Toast.makeText(getContext(), "set shop location fail (error code = 1)", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("cafe", "get last location fail : " + e.getMessage());
+                    Toast.makeText(getContext(), "set shop location fail (error code = 2)", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    final ProgressBar progressBar = getView().findViewById(R.id.register_progress_bar);
+                    fbStore.collection("shop").document(shopNameStr).set(shop)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("cafe", "add shop success");
+                                    //Toast.makeText(getContext(), "add shop success", Toast.LENGTH_SHORT).show();
+                                    uploadShopPicture();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressBar.setVisibility(View.GONE);
+                            Log.d("cafe", "add shop error : " + e.getMessage());
+                            Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        }
+        catch (SecurityException e)
+        {
+            Log.d("cafe", "location permission not granted : " +e.getMessage());
+            Toast.makeText(getContext(), "set shop location fail (error code = 3)" + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        catch (NullPointerException e)
+        {
+            Log.d("cafe", "catch NullPointerException : " + e.getMessage());
+            Toast.makeText(getContext(), "set shop location fail (error code = 4)", Toast.LENGTH_LONG).show();
+        }
     }
 
     void uploadShopPicture()

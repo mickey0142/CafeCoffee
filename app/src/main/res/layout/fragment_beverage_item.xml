@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/beverage_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="abcdef"/>
+
+    <TextView
+        android:id="@+id/beverage_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="abcdef"
+        android:layout_marginTop="-20dp"/>
+
+    <TextView
+        android:id="@+id/beverage_item_sum_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/beverage_item_more_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="no additional detail"/>
+
+</LinearLayout>
