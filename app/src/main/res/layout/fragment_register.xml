@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,66 +19,106 @@
                 android:text="back"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <Button
+                    android:textColor="#ffffff"
                     android:id="@+id/register_customer_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="customer"
-                    android:background="#FFFF00"/>
+                    android:background="@drawable/border_button"
+                    />
 
                 <Button
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="10dp"
                     android:id="@+id/register_shop_owner_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="shop owner"
-                    android:background="#DDDDDD"/>
+                    android:background="@drawable/border_button"/>
             </LinearLayout>
-
             <EditText
+                android:drawableLeft="@drawable/ic_email"
+                android:textColorHint="#000"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:padding="7dp"
                 android:id="@+id/register_email"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:hint="email"/>
-
+                android:inputType="textPassword"
+                android:background="@drawable/border_textinput"
+                android:hint="Email"/>
             <EditText
+                android:drawableLeft="@drawable/ic_person_user"
+                android:textColorHint="#000"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:padding="7dp"
                 android:id="@+id/register_username"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:hint="username"/>
-
+                android:inputType="textPassword"
+                android:background="@drawable/border_textinput"
+                android:hint="Username"/>
             <EditText
+                android:drawableLeft="@drawable/ic_vpn_key_password"
+                android:textColorHint="#000"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:padding="7dp"
                 android:id="@+id/register_password"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:hint="password"/>
+                android:inputType="textPassword"
+                android:background="@drawable/border_textinput"
+                android:hint="Password"/>
 
-            <TextView
-                android:text="profile picture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/add_picture"
+                android:src="@drawable/ic_person_user"/>
 
             <ImageView
                 android:id="@+id/register_selected_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/register_camera_button"
+            <LinearLayout
+                android:layout_margin="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="open camera"/>
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/register_choose_picture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="choose picture"/>
+                <Button
+                    android:id="@+id/register_camera_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_button"
+                    android:text="Open camera"
+                    tools:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/register_choose_picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_button"
+                    android:text="Choose picture"
+                    tools:textColor="#ffffff" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/register_shop_owner_linear_layout"
@@ -106,14 +147,17 @@
                 <Button
                     android:id="@+id/register_shop_camera_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="open camera"/>
+                    android:layout_height="35dp"
+                    android:text="open camera"
+                    android:textColor="#ffffff"/>
 
                 <Button
                     android:id="@+id/register_shop_choose_picture"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="choose picture"/>
+                    android:layout_height="35dp"
+                    android:text="choose picture"
+                    android:textColor="#ffffff"
+                    />
 
             </LinearLayout>
 
@@ -125,10 +169,13 @@
                 android:layout_gravity="center"/>
 
             <Button
+                android:background="@drawable/border_button"
                 android:id="@+id/register_register_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="register"/>
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:text="register"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"/>
 
         </LinearLayout>
     </ScrollView>
