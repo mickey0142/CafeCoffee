@@ -70,6 +70,14 @@
         android:layout_gravity="center"
         android:visibility="gone"/>
 
+    <CheckBox
+        android:id="@+id/update_status_save_log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="save paid order to text file"
+        android:visibility="gone"/>
+
     <Button
         android:id="@+id/update_status_update_button"
         android:layout_width="match_parent"
