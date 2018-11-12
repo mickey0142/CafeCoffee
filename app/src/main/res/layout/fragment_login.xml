@@ -17,12 +17,6 @@
                 android:layout_height="wrap_content"
                 android:text="customer skip"/>
 
-            <Button
-                android:id="@+id/login_skip_button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="shopOwner skip"/>
-
             <EditText
                 android:drawableLeft="@drawable/ic_person_user"
                 android:textColorHint="#000"

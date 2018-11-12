@@ -131,9 +131,11 @@ public class RegisterFragment extends Fragment {
                 EditText email = getView().findViewById(R.id.register_email);
                 EditText username = getView().findViewById(R.id.register_username);
                 EditText password = getView().findViewById(R.id.register_password);
+                EditText rePassword = getView().findViewById(R.id.register_re_password);
                 String emailStr = email.getText().toString();
                 final String usernameStr = username.getText().toString();
                 String passwordStr = password.getText().toString();
+                String rePasswordStr = rePassword.getText().toString();
                 if (emailStr.isEmpty() || usernameStr.isEmpty() || passwordStr.isEmpty())
                 {
                     Toast.makeText(getContext(), "some field is empty", Toast.LENGTH_SHORT).show();
@@ -148,6 +150,10 @@ public class RegisterFragment extends Fragment {
                 {
                     Toast.makeText(getContext(), "please choose shop picture", Toast.LENGTH_SHORT).show();
                     return;
+                }
+                if (!passwordStr.equals(rePasswordStr))
+                {
+                    Toast.makeText(getContext(), "password and re password is not equal", Toast.LENGTH_SHORT).show();
                 }
                 final ProgressBar progressBar = getView().findViewById(R.id.register_progress_bar);
                 progressBar.setVisibility(View.VISIBLE);
@@ -288,11 +294,15 @@ public class RegisterFragment extends Fragment {
             {
                 ImageView profile = getView().findViewById(R.id.register_selected_image);
                 profile.setImageURI(uri);
+                ImageView placeholder = getView().findViewById(R.id.register_placeholder_icon_profile);
+                placeholder.setVisibility(View.GONE);
             }
             else if (requestCode == PICK_IMAGE_SHOP)
             {
                 ImageView shop = getView().findViewById(R.id.register_shop_picture);
                 shop.setImageURI(uri);
+                ImageView placeholder = getView().findViewById(R.id.register_placeholder_icon_shop);
+                placeholder.setVisibility(View.GONE);
             }
             path = GetFilePathFromDevice.getPath(getContext(), uri);
             String fileName = "";
@@ -317,6 +327,8 @@ public class RegisterFragment extends Fragment {
             {
                 return;
             }
+            ImageView placeholder = getView().findViewById(R.id.register_placeholder_icon_profile);
+            placeholder.setVisibility(View.GONE);
             profilePictureUri = data.getData();
             String path = GetFilePathFromDevice.getPath(getContext(), profilePictureUri);
             profilePictureName = profilePictureUri.getLastPathSegment();
@@ -338,6 +350,8 @@ public class RegisterFragment extends Fragment {
         else if (requestCode == OPEN_CAMERA_SHOP)
         {
             if (data == null) return;
+            ImageView placeholder = getView().findViewById(R.id.register_placeholder_icon_shop);
+            placeholder.setVisibility(View.GONE);
             shopPictureUri = data.getData();
             shopPictureName = shopPictureUri.getLastPathSegment();
             ImageView profile = getView().findViewById(R.id.register_shop_picture);
