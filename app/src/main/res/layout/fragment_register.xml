@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/border_button"
+                    android:background="@drawable/actived_button"
                     android:text="shop owner"
                     android:textColor="#ffffff" />
             </LinearLayout>
@@ -54,7 +54,7 @@
                 android:background="@drawable/border_textinput"
                 android:drawableLeft="@drawable/ic_email"
                 android:hint="Email"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:padding="7dp"
                 android:textColorHint="#000" />
 
@@ -67,7 +67,7 @@
                 android:background="@drawable/border_textinput"
                 android:drawableLeft="@drawable/ic_person_user"
                 android:hint="Username"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:padding="7dp"
                 android:textColorHint="#000" />
 
@@ -85,7 +85,7 @@
                 android:textColorHint="#000" />
 
             <EditText
-                android:id="@+id/register_repassword"
+                android:id="@+id/register_re_password"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -98,6 +98,7 @@
                 android:textColorHint="#000" />
 
             <ImageView
+                android:id="@+id/register_placeholder_icon_profile"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
@@ -143,13 +144,6 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <ImageView
-                    android:id="@+id/register_shop_picture"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:background="@color/colorPrimary"
-                    android:layout_gravity="center"/>
-
                 <EditText
                     android:layout_marginTop="10dp"
                     android:id="@+id/register_shop_name"
@@ -160,7 +154,7 @@
                     android:background="@drawable/border_textinput"
                     android:drawableLeft="@drawable/ic_shop_name"
                     android:hint="Shop name"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:padding="7dp"
                     android:textColorHint="#000" />
 
@@ -173,9 +167,24 @@
                     android:background="@drawable/border_textinput"
                     android:drawableLeft="@drawable/ic_location"
                     android:hint="Location"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:padding="7dp"
                     android:textColorHint="#000" />
+
+                <ImageView
+                    android:id="@+id/register_placeholder_icon_shop"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/add_picture"
+                    android:src="@drawable/ico_store" />
+
+                <ImageView
+                    android:id="@+id/register_shop_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -202,8 +211,6 @@
                         android:text="Choose picture"
                         android:textColor="#ffffff" />
                 </LinearLayout>
-
-
 
             </LinearLayout>
 
