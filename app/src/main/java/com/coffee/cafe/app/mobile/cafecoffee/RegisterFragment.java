@@ -104,8 +104,8 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 type = "customer";
-                customerButton.setBackgroundColor(Color.parseColor("#FFFF00"));
-                shopOwnerButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                customerButton.setBackgroundResource(R.drawable.border_button);
+                shopOwnerButton.setBackgroundResource(R.drawable.actived_button);
                 LinearLayout shopOwnerLayout = getView().findViewById(R.id.register_shop_owner_linear_layout);
                 shopOwnerLayout.setVisibility(View.GONE);
             }
@@ -114,8 +114,8 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 type = "shopOwner";
-                customerButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-                shopOwnerButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                customerButton.setBackgroundResource(R.drawable.actived_button);
+                shopOwnerButton.setBackgroundResource(R.drawable.border_button);
                 LinearLayout shopOwnerLayout = getView().findViewById(R.id.register_shop_owner_linear_layout);
                 shopOwnerLayout.setVisibility(View.VISIBLE);
             }
