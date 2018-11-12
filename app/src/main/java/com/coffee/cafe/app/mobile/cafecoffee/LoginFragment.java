@@ -88,21 +88,6 @@ public class LoginFragment extends Fragment {
                 ft.replace(R.id.main_view, homeFragment).commit();
             }
         });
-
-        Button skipButton2 = getView().findViewById(R.id.login_skip_button2);
-        skipButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User user = new User("59070142@it.kmitl.ac.th", "maytat", "shopOwner");
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("User object", user);
-                Fragment homeFragment = new ShopOwnerHomeFragment();
-                homeFragment.setArguments(bundle);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.replace(R.id.main_view, homeFragment).commit();
-            }
-        });
         initEnterPressed();
         initLoginButton();
         initRegisterButton();
