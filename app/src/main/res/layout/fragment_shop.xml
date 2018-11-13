@@ -11,7 +11,30 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_back_arrow"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Menu"
+                    android:textColor="#84410D"
+                    android:layout_weight="3"
+                    android:textSize="30dp"
+                    android:textAlignment="center"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_back_arrow"
+                    android:layout_weight="1"/>
+            </LinearLayout>
             <Button
                 android:id="@+id/shop_status_button"
                 android:layout_width="match_parent"
@@ -28,18 +51,30 @@
                 android:id="@+id/shop_shop_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="shop name"/>
+                android:text="shop name"
+                android:textAlignment="center"
+                android:textSize="30dp"/>
 
             <LinearLayout
+                android:layout_margin="16dp"
                 android:id="@+id/shop_cappuccino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@drawable/menu_items_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#888888"
+                    android:layout_margin="16dp"/>
                 <TextView
-                    android:text="cappuccino"
+                    android:textSize="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Cappuccino"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
+                    android:layout_height="wrap_content"
+                    />
                 <include
                     android:id="@+id/shop_cappuccino_option"
                     layout="@layout/fragment_beverage_option"
@@ -47,14 +82,25 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_margin="16dp"
                 android:id="@+id/shop_espresso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@drawable/menu_items_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#888888"
+                    android:layout_margin="16dp"/>
                 <TextView
-                    android:text="espresso"
+                    android:textSize="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Espresso"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
                 <include
                     android:id="@+id/shop_espresso_option"
                     layout="@layout/fragment_beverage_option"
@@ -62,14 +108,25 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_margin="16dp"
                 android:id="@+id/shop_americano"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@drawable/menu_items_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#888888"
+                    android:layout_margin="16dp"/>
                 <TextView
-                    android:text="americano"
+                    android:textSize="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Americano"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
                 <include
                     android:id="@+id/shop_americano_option"
                     layout="@layout/fragment_beverage_option"
@@ -77,14 +134,25 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_margin="16dp"
                 android:id="@+id/shop_macchiato"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@drawable/menu_items_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#888888"
+                    android:layout_margin="16dp"/>
                 <TextView
-                    android:text="macchiato"
+                    android:textSize="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Macchiato"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
                 <include
                     android:id="@+id/shop_macchiato_option"
                     layout="@layout/fragment_beverage_option"
@@ -92,14 +160,25 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_margin="16dp"
                 android:id="@+id/shop_latte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@drawable/menu_items_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#888888"
+                    android:layout_margin="16dp"/>
                 <TextView
-                    android:text="latte"
+                    android:textSize="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Latte"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
                 <include
                     android:id="@+id/shop_latte_option"
                     layout="@layout/fragment_beverage_option"
@@ -107,14 +186,25 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_margin="16dp"
                 android:id="@+id/shop_mocha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@drawable/menu_items_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#888888"
+                    android:layout_margin="16dp"/>
                 <TextView
-                    android:text="mocha"
+                    android:textSize="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Mocha"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
                 <include
                     android:id="@+id/shop_mocha_option"
                     layout="@layout/fragment_beverage_option"
@@ -122,19 +212,31 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_margin="16dp"
                 android:id="@+id/shop_cocoa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@drawable/menu_items_border"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#888888"
+                    android:layout_margin="16dp"/>
                 <TextView
-                    android:text="cocoa"
+                    android:textSize="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Cocoa"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
                 <include
                     android:id="@+id/shop_cocoa_option"
                     layout="@layout/fragment_beverage_option"
                     android:visibility="gone"/>
             </LinearLayout>
+
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/shop_map_view"
