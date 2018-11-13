@@ -53,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:text="Forget password?"/>
                 <TextView
+                    android:id="@+id/login_forgot_password"
                     android:textColor="#ff3232"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"

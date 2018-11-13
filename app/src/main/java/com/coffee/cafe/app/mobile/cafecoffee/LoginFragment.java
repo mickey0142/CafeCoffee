@@ -91,6 +91,7 @@ public class LoginFragment extends Fragment {
         initEnterPressed();
         initLoginButton();
         initRegisterButton();
+        initForgotPassword();
         clearBackStack();
     }
 
@@ -243,6 +244,21 @@ public class LoginFragment extends Fragment {
             }
         });
     }
+
+    public void initForgotPassword()
+    {
+        TextView forgotPassword = getView().findViewById(R.id.login_forgot_password);
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, new ForgotPasswordFragment())
+                        .addToBackStack(null).commit();
+            }
+        });
+    }
+
 
     void clearBackStack()
     {
