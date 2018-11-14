@@ -47,13 +47,13 @@
                 android:layout_height="wrap_content"
                 android:text="cart"/>
 
-            <TextView
-                android:id="@+id/shop_shop_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="shop name"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
+            <!--<TextView-->
+                <!--android:id="@+id/shop_shop_name"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="shop name"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textSize="30dp"/>-->
 
             <LinearLayout
                 android:layout_margin="16dp"

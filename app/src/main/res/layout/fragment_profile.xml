@@ -3,10 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="Profile"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingLeft="35dp"
+            android:text="Profile"
+            android:textSize="30dp"
+            android:layout_weight="1.5"/>
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/cart"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,6 +43,13 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/add_picture"
                 android:src="@drawable/ic_person_user" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:text="Customer_name"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,107 +76,86 @@
                     android:text="Choose picture"
                     android:textColor="#ffffff" />
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/profile_email"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:background="@drawable/border_textinput"
-                android:drawableLeft="@drawable/ic_email"
-                android:hint="Email"
-                android:inputType="textPassword"
-                android:padding="7dp"
-                android:textColorHint="#000" />
-
-            <EditText
-                android:id="@+id/profile_username"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="7dp"
-                android:background="@drawable/border_textinput"
-                android:drawableLeft="@drawable/ic_person_user"
-                android:hint="Username"
-                android:inputType="textPassword"
-                android:padding="7dp"
-                android:textColorHint="#000" />
-
-
-            <ImageView
-                android:id="@+id/profile_selected_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <LinearLayout
-                android:id="@+id/profile_shop_owner_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/profile_shop_picture"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center"
-                    android:background="@color/colorPrimary" />
-
-                <EditText
-                    android:id="@+id/profile_shop_name"
-                    android:layout_width="300dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/border_textinput"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="7dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/border_textinput"
-                    android:drawableLeft="@drawable/ic_shop_name"
-                    android:hint="Shop name"
-                    android:inputType="textPassword"
-                    android:padding="7dp"
-                    android:textColorHint="#000" />
-
-                <EditText
-                    android:id="@+id/profile_location"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="7dp"
-                    android:background="@drawable/border_textinput"
-                    android:drawableLeft="@drawable/ic_location"
-                    android:hint="Location"
-                    android:inputType="textPassword"
-                    android:padding="7dp"
-                    android:textColorHint="#000" />
+                    android:orientation="horizontal"
+                    android:layout_margin="10dp">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/profile_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Username"
+                        android:textColor="#000"
+                        android:textSize="15dp"/>
+                    <TextView
+                        android:layout_weight="5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User_name"
+                        android:textColor="#000"/>
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change"
+                        android:textColor="#3557fd"
+                        android:textStyle="bold"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/profile_shop_camera_button"
+                    android:orientation="horizontal"
+                    android:layout_margin="10dp">
+                    <TextView
+                        android:layout_weight="9"
+                        android:id="@+id/profile_password"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
+                        android:text="Password"
+                        android:textColor="#000"
+                        android:textSize="15dp"/>
+                    <TextView
                         android:layout_weight="1"
-                        android:background="@drawable/border_button"
-                        android:text="Open camera"
-                        android:textColor="#ffffff" />
-
-                    <Button
-                        android:id="@+id/profile_shop_choose_picture"
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/border_button"
-                        android:text="Choose picture"
-                        android:textColor="#ffffff" />
+                        android:layout_height="wrap_content"
+                        android:text="Change"
+                        android:textColor="#3557fd"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                >
+                <TextView
+                    android:id="@+id/profile_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Logout"
+                    android:textColor="#000"
+                    android:textSize="20dp"/>
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/exit"
+                    android:layout_gravity="end"/>
             </LinearLayout>
 
             <ProgressBar
@@ -161,15 +165,7 @@
                 android:layout_gravity="center"
                 android:visibility="gone" />
 
-            <Button
-                android:id="@+id/profile_confirm_button"
-                android:layout_width="300dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/border_button"
-                android:text="Ok"
-                android:textColor="#ffffff" />
+
         </LinearLayout>
     </ScrollView>
 
