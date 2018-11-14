@@ -17,6 +17,11 @@
                 android:layout_height="wrap_content"
                 android:text="customer skip"/>
 
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/logocoffee1"/>
             <EditText
                 android:drawableLeft="@drawable/ic_person_user"
                 android:textColorHint="#000"
