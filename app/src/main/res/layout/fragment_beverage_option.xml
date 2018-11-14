@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/actived_button">
+    android:layout_margin="16dp"
+    android:background="#f6f8fa">
 
     <LinearLayout
         android:layout_margin="10dp"
@@ -19,23 +20,26 @@
             android:text="normal"/>
 
         <TextView
-            android:text="Size : "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:text="Size : "
+            android:textSize="28dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/option_size_normal_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="normal"
-            android:background="#FFFF00" />
+            android:background="@drawable/border_button"
+            android:text="normal" />
 
         <Button
+            android:layout_marginLeft="5dp"
             android:id="@+id/option_size_big_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="big"
-            android:background="#DDDDDD"/>
+            android:background="@drawable/actived_button"/>
 
     </LinearLayout>
 
@@ -54,58 +58,68 @@
             android:text="hot"/>
 
         <TextView
-            android:text="Type : "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:text="Type : "
+            android:textSize="28dp"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/option_hot_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="hot"
-            android:background="#FFFF00"/>
+            android:background="@drawable/border_button"/>
 
         <Button
+            android:layout_marginLeft="5dp"
             android:id="@+id/option_cold_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="cold"
-            android:background="#DDDDDD"/>
+            android:background="@drawable/actived_button"/>
 
         <Button
+            android:layout_marginLeft="5dp"
             android:id="@+id/option_frappe_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="frappe"
-            android:background="#DDDDDD"/>
+            android:background="@drawable/actived_button"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:text="Amount : "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:text="Amount : "
+            android:textSize="28dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/option_decrease_amount"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="-"/>
+            android:text="-" />
 
         <TextView
             android:id="@+id/option_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"/>
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="1"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
 
         <Button
             android:id="@+id/option_increase_amount"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="+"/>
 
@@ -117,16 +131,32 @@
         android:layout_height="wrap_content"
         android:hint="More Detail..."/>
 
-    <TextView
-        android:id="@+id/option_price"
-        android:text="Price : "
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/option_price"
+            android:text="Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0.00$"
+            android:textSize="20dp"
+            android:textAlignment="textEnd"
+            />
+    </LinearLayout>
+
 
     <Button
+        android:layout_marginTop="10dp"
         android:id="@+id/option_add_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border_button"
         android:text="add"/>
 
 </LinearLayout>
