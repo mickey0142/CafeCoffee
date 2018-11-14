@@ -65,17 +65,17 @@ public class ProfileFragment extends Fragment {
     }
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initConfirmButton();
+        //initConfirmButton();
     }
-    void initConfirmButton(){
-        final ProgressBar progressBar = getView().findViewById(R.id.profile_progress_bar);
-        Button confirmButton = getView().findViewById(R.id.profile_confirm_button);
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-
-            }
-        });
-    }
+//    void initConfirmButton(){
+//        final ProgressBar progressBar = getView().findViewById(R.id.profile_progress_bar);
+//        Button confirmButton = getView().findViewById(R.id.profile_confirm_button);
+//        confirmButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                progressBar.setVisibility(View.VISIBLE);
+//
+//           }
+//        });
+//    }
 }
