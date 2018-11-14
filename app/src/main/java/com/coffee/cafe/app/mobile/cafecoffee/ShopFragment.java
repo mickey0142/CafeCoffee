@@ -192,8 +192,8 @@ public class ShopFragment extends Fragment {
         normalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                normalButton.setBackgroundColor(Color.parseColor("#FFFF00"));
-                bigButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                normalButton.setBackgroundResource(R.drawable.border_button);
+                bigButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setSize("normal");
                 String priceStr = "Price : " + beverage.getPrice();
                 if (beverage.getAmount() > 1)
@@ -206,8 +206,8 @@ public class ShopFragment extends Fragment {
         bigButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                normalButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-                bigButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                normalButton.setBackgroundResource(R.drawable.actived_button);
+                bigButton.setBackgroundResource(R.drawable.border_button);
                 beverage.setSize("big");
                 String priceStr = "Price : " + beverage.getPrice();
                 if (beverage.getAmount() > 1)
@@ -224,9 +224,9 @@ public class ShopFragment extends Fragment {
         hotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hotButton.setBackgroundColor(Color.parseColor("#FFFF00"));
-                coldButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-                frappeButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                hotButton.setBackgroundResource(R.drawable.border_button);
+                coldButton.setBackgroundResource(R.drawable.actived_button);
+                frappeButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setType("hot");
                 String priceStr = "Price : " + beverage.getPrice();
                 if (beverage.getAmount() > 1)
@@ -239,9 +239,9 @@ public class ShopFragment extends Fragment {
         coldButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hotButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-                coldButton.setBackgroundColor(Color.parseColor("#FFFF00"));
-                frappeButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                hotButton.setBackgroundResource(R.drawable.actived_button);
+                coldButton.setBackgroundResource(R.drawable.border_button);
+                frappeButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setType("cold");
                 String priceStr = "Price : " + beverage.getPrice();
                 if (beverage.getAmount() > 1)
@@ -254,9 +254,9 @@ public class ShopFragment extends Fragment {
         frappeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hotButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-                coldButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-                frappeButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+                hotButton.setBackgroundResource(R.drawable.actived_button);
+                coldButton.setBackgroundResource(R.drawable.actived_button);
+                frappeButton.setBackgroundResource(R.drawable.border_button);
                 beverage.setType("frappe");
                 String priceStr = "Price : " + beverage.getPrice();
                 if (beverage.getAmount() > 1)
