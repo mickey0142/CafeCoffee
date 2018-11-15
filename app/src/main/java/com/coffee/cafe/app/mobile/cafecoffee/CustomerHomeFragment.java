@@ -1,5 +1,7 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +31,6 @@ import Model.Shop;
 import Model.User;
 
 public class CustomerHomeFragment extends Fragment {
-
     FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fbStore = FirebaseFirestore.getInstance();
     User user;
@@ -68,10 +70,22 @@ public class CustomerHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 fbAuth.signOut();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.main_view, new LoginFragment())
-                        .commit();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Do you want EXIT");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: dialog show.");
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).commit();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: not active.");
+                    }
+                });
+                builder.show();
             }
         });
     }
