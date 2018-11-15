@@ -10,25 +10,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:text="cart page"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/cart"/>
 
             <ListView
                 android:id="@+id/cart_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="true"
+                android:layout_margin="16dp"
                 >
 
             </ListView>
 
             <TextView
+                android:layout_margin="16dp"
                 android:id="@+id/cart_sum_price"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"/>
 
             <ProgressBar
                 android:id="@+id/cart_progress_bar"
@@ -41,6 +44,7 @@
                 android:id="@+id/cart_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:text="confirm"/>
 
         </LinearLayout>
