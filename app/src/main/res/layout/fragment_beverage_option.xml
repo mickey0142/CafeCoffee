@@ -6,18 +6,11 @@
     android:background="#f6f8fa">
 
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- just using this to keep variable. don't remove it-->
-        <TextView
-            android:id="@+id/option_size_keeper"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:text="normal"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,18 +37,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <!-- just using this to keep variable. don't remove it-->
-        <TextView
-            android:id="@+id/option_type_keeper"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:text="hot"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="hot"
-            android:background="@drawable/border_button"/>
+            android:background="@drawable/border_button" />
 
         <Button
             android:layout_marginLeft="5dp"
@@ -90,7 +75,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
