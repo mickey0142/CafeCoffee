@@ -24,7 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/border_button"
-            android:text="normal" />
+            android:text="normal"
+            android:textColor="#ffffff"
+            />
 
         <Button
             android:layout_marginLeft="5dp"
@@ -32,7 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="big"
-            android:background="@drawable/actived_button"/>
+            android:background="@drawable/actived_button"
+            android:textColor="#ffffff"
+            />
 
     </LinearLayout>
 
@@ -54,7 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="hot"
-            android:background="@drawable/border_button" />
+            android:background="@drawable/border_button"
+            android:textColor="#ffffff"
+            />
 
         <Button
             android:layout_marginLeft="5dp"
@@ -62,7 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="cold"
-            android:background="@drawable/actived_button"/>
+            android:background="@drawable/actived_button"
+            android:textColor="#ffffff"
+            />
 
         <Button
             android:layout_marginLeft="5dp"
@@ -70,7 +78,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="frappe"
-            android:background="@drawable/actived_button"/>
+            android:background="@drawable/actived_button"
+            android:textColor="#ffffff"
+            />
 
     </LinearLayout>
 
@@ -106,7 +116,8 @@
             android:id="@+id/option_increase_amount"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="+"/>
+            android:text="+"
+            />
 
     </LinearLayout>
 
@@ -142,6 +153,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border_button"
-        android:text="add"/>
+        android:text="add"
+        android:textColor="#ffffff"
+        />
 
 </LinearLayout>
