@@ -12,9 +12,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="Shop Page"
+                android:layout_marginTop="10dp"
+                android:text="Cafe"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#84410D"
+                android:textSize="30dp"
+                android:textAlignment="center"/>
 
             <Button
                 android:id="@+id/customer_home_logout_button"
@@ -27,12 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"/>
+                <ListView
+                    android:layout_margin="16dp"
+                    android:id="@+id/customer_home_shop_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:nestedScrollingEnabled="true">
+                </ListView>
 
-            <ListView
-                android:id="@+id/customer_home_shop_list"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:nestedScrollingEnabled="true"></ListView>
 
         </LinearLayout>
     </ScrollView>

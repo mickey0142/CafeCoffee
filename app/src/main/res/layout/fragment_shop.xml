@@ -64,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/menu_items_border"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:elevation="10dp">
 
                 <ImageView
                     android:layout_width="32dp"
@@ -98,7 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/menu_items_border"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:elevation="10dp">
 
                 <ImageView
                     android:layout_width="32dp"
@@ -133,7 +135,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/menu_items_border"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:elevation="10dp">
 
                 <ImageView
                     android:layout_width="32dp"
@@ -169,7 +172,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/menu_items_border"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:elevation="10dp">
 
                 <ImageView
                     android:layout_width="32dp"
@@ -203,7 +207,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:background="@drawable/menu_items_border"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:elevation="10dp">
 
                     <ImageView
                         android:layout_width="32dp"
@@ -239,6 +244,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/menu_items_border"
+                android:elevation="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -274,7 +280,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/menu_items_border"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:elevation="10dp">
 
                 <ImageView
                     android:layout_width="32dp"
@@ -301,7 +308,6 @@
                 android:id="@+id/shop_map_view"
                 android:layout_width="match_parent"
                 android:layout_height="300dp" />
-
         </LinearLayout>
     </ScrollView>
 
