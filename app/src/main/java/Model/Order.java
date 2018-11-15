@@ -14,6 +14,7 @@ public class Order implements Serializable{
     private ArrayList<Beverage> beverages = new ArrayList<>();
     private String orderTime;
     private String shopName;
+    private String documentId;
 
     public Order()
     {
@@ -105,5 +106,13 @@ public class Order implements Serializable{
 
     public void setShopName(String shopName) {
         this.shopName = shopName;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 }

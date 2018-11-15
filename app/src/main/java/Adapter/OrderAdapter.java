@@ -34,8 +34,10 @@ public class OrderAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View orderList = LayoutInflater.from(context).inflate(R.layout.fragment_order_item, parent, false);
-        TextView status = orderList.findViewById(R.id.order_item_status);
         Order order = orders.get(position);
+        TextView shopName = orderList.findViewById(R.id.order_item_shop_name);
+        shopName.setText("Shop name : " + order.getShopName());
+        TextView status = orderList.findViewById(R.id.order_item_status);
         status.setText("Status : " + order.getStatus());
         TextView time = orderList.findViewById(R.id.order_item_time);
         time.setText("Order Time : " + order.orderTimeReverse());

@@ -124,4 +124,5 @@ public class CustomerHomeFragment extends Fragment {
             }
         });
     }
+
 }

@@ -33,11 +33,9 @@ public class BeverageAdapter extends ArrayAdapter {
         View beverageList = LayoutInflater.from(context).inflate(R.layout.fragment_beverage_item, parent, false);
         Beverage beverage = beverages.get(position);
         TextView name = beverageList.findViewById(R.id.beverage_item_name);
-        TextView price = beverageList.findViewById(R.id.beverage_item_price);
         TextView sumPrice = beverageList.findViewById(R.id.beverage_item_sum_price);
         TextView moreDetail = beverageList.findViewById(R.id.beverage_item_more_detail);
         name.setText(beverage.getType() + " " + beverage.getName() + " " + beverage.getSize());
-        price.setText(beverage.getPrice()+"");
         sumPrice.setText("Total Price : " + beverage.getPrice() + " X " + beverage.getAmount() + " = " + beverage.getPrice("total"));
         moreDetail.setText(beverage.getMoreDetail());
         return beverageList;

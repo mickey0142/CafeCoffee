@@ -40,7 +40,7 @@ public class StatusFragment extends Fragment {
         this.setRetainInstance(true);
         Bundle bundle = getArguments();
         user = (User) bundle.getSerializable("User object");
-        shop = (Shop) bundle.getSerializable("Shop object");
+//        shop = (Shop) bundle.getSerializable("Shop object");
         Log.d("test", "user : " + user);
     }
 
@@ -64,7 +64,7 @@ public class StatusFragment extends Fragment {
     void initOrderList()
     {
         final ListView orderList = getView().findViewById(R.id.status_order_list);
-        fbStore.collection("order").whereEqualTo("shopName", shop.getShopName()).whereEqualTo("customerName", user.getUsername())
+        fbStore.collection("order").whereEqualTo("customerName", user.getUsername())
                 .orderBy("orderTime", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@javax.annotation.Nullable QuerySnapshot documentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {

@@ -180,9 +180,10 @@ public class ShopFragment extends Fragment {
         beverage.setAmount(1);
         LinearLayout linearLayout = getView().findViewById(layoutId);
         final TextView price = linearLayout.findViewById(R.id.option_price);
-        String priceStr = "Price : " + beverage.getPrice();
+        String priceStr = beverage.getPrice() + " ฿";
         if (beverage.getAmount() > 1)
         {
+            priceStr = priceStr.substring(0, priceStr.lastIndexOf('฿') - 1);
             priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
         }
         price.setText(priceStr);
@@ -195,10 +196,11 @@ public class ShopFragment extends Fragment {
                 normalButton.setBackgroundResource(R.drawable.border_button);
                 bigButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setSize("normal");
-                String priceStr = "Price : " + beverage.getPrice();
+                String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
-                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                    priceStr = priceStr.substring(0, priceStr.lastIndexOf('฿') - 1);
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿";
                 }
                 price.setText(priceStr);
             }
@@ -209,10 +211,11 @@ public class ShopFragment extends Fragment {
                 normalButton.setBackgroundResource(R.drawable.actived_button);
                 bigButton.setBackgroundResource(R.drawable.border_button);
                 beverage.setSize("big");
-                String priceStr = "Price : " + beverage.getPrice();
+                String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
-                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                    priceStr = priceStr.substring(0, priceStr.lastIndexOf('฿') - 1);
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿";
                 }
                 price.setText(priceStr);
             }
@@ -228,10 +231,11 @@ public class ShopFragment extends Fragment {
                 coldButton.setBackgroundResource(R.drawable.actived_button);
                 frappeButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setType("hot");
-                String priceStr = "Price : " + beverage.getPrice();
+                String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
-                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                    priceStr = priceStr.substring(0, priceStr.lastIndexOf('฿') - 1);
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿";
                 }
                 price.setText(priceStr);
             }
@@ -243,10 +247,11 @@ public class ShopFragment extends Fragment {
                 coldButton.setBackgroundResource(R.drawable.border_button);
                 frappeButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setType("cold");
-                String priceStr = "Price : " + beverage.getPrice();
+                String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
-                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                    priceStr = priceStr.substring(0, priceStr.lastIndexOf('฿') - 1);
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿";
                 }
                 price.setText(priceStr);
             }
@@ -258,10 +263,11 @@ public class ShopFragment extends Fragment {
                 coldButton.setBackgroundResource(R.drawable.actived_button);
                 frappeButton.setBackgroundResource(R.drawable.border_button);
                 beverage.setType("frappe");
-                String priceStr = "Price : " + beverage.getPrice();
+                String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
-                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                    priceStr = priceStr.substring(0, priceStr.lastIndexOf('฿') - 1);
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿";
                 }
                 price.setText(priceStr);
             }
@@ -277,10 +283,11 @@ public class ShopFragment extends Fragment {
                 num += 1;
                 amount.setText(num+"");
                 beverage.setAmount(Integer.parseInt(amount.getText().toString()));
-                String priceStr = "Price : " + beverage.getPrice();
+                String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
-                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                    priceStr = priceStr.substring(0, priceStr.lastIndexOf('฿') - 1);
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿";
                 }
                 price.setText(priceStr);
             }
@@ -295,10 +302,11 @@ public class ShopFragment extends Fragment {
                 }
                 amount.setText(num+"");
                 beverage.setAmount(Integer.parseInt(amount.getText().toString()));
-                String priceStr = "Price : " + beverage.getPrice();
+                String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
-                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
+                    priceStr = priceStr.substring(0, priceStr.lastIndexOf('฿') - 1);
+                    priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿";
                 }
                 price.setText(priceStr);
             }

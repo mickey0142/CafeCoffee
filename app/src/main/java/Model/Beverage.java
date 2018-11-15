@@ -29,6 +29,7 @@ public class Beverage implements Serializable{
     public Beverage(String type)
     {
         name = type;
+        this.type = "normal";
         if (type.equals("Cappuccino"))
         {
             price = cappuccinoPrice;
@@ -68,26 +69,18 @@ public class Beverage implements Serializable{
     }
 
     public int getPrice() {
-        int finalPrice = this.price;
-        if (this.size.equals("big")) finalPrice += 5;
-        if (this.type.equals("cold")) finalPrice += 5;
-        else if (this.type.equals("frappe")) finalPrice += 10;
-        return finalPrice;
+        return this.price;
     }
 
     public int getPrice(String type)
     {
-        int finalPrice = this.price;
-        if (this.size.equals("big")) finalPrice += 5;
-        if (this.type.equals("cold")) finalPrice += 5;
-        else if (this.type.equals("frappe")) finalPrice += 10;
         if (type.equals("total"))
         {
-            return finalPrice * this.amount;
+            return this.price * this.amount;
         }
         else
         {
-            return finalPrice;
+            return this.price;
         }
     }
 
@@ -109,6 +102,7 @@ public class Beverage implements Serializable{
 
     public void setSize(String size) {
         this.size = size;
+        calculatePrice();
     }
 
     public String getMoreDetail() {
@@ -125,6 +119,7 @@ public class Beverage implements Serializable{
 
     public void setType(String type) {
         this.type = type;
+        calculatePrice();
     }
 
     public void increaseAmount()
@@ -149,5 +144,66 @@ public class Beverage implements Serializable{
         lattePrice = menuPrice.get("Latte");
         mochaPrice = menuPrice.get("Mocha");
         cocoaPrice = menuPrice.get("Cocoa");
+    }
+
+    public static int getCoffeePrice(String coffee)
+    {
+        if (coffee.equals("Cappuccino"))
+        {
+            return Beverage.cappuccinoPrice;
+        }
+        else if (coffee.equals("Espresso"))
+        {
+            return Beverage.espressoPrice;
+        }
+        else if (coffee.equals("Americano"))
+        {
+            return Beverage.americanoPrice;
+        }
+        else if (coffee.equals("Macchiato"))
+        {
+            return Beverage.macchiatoPrice;
+        }
+        else if (coffee.equals("Latte"))
+        {
+            return Beverage.lattePrice;
+        }
+        else if (coffee.equals("Mocha"))
+        {
+            return Beverage.mochaPrice;
+        }
+        else if (coffee.equals("Cocoa"))
+        {
+            return Beverage.cocoaPrice;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    void calculatePrice()
+    {
+        price = getCoffeePrice(name);
+        if (size == null)
+        {
+            return;
+        }
+        else if (size.equals("big"))
+        {
+            price += 5;
+        }
+        if (type == null)
+        {
+            return;
+        }
+        else if (type.equals("cold"))
+        {
+            price += 5;
+        }
+        else if (type.equals("frappe"))
+        {
+            price += 10;
+        }
     }
 }

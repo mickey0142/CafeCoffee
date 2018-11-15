@@ -15,11 +15,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import Adapter.CartAdapter;
 import Model.Order;
@@ -102,18 +106,30 @@ public class CartFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        // get auto genereated id from documentReference here add update the that
-                        // document again to save id into object
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(getContext(), "order success", Toast.LENGTH_SHORT).show();
-                        Fragment fragment = new StatusFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("User object", user);
-                        bundle.putSerializable("Shop object", shop);
-                        fragment.setArguments(bundle);
-                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                        ft.replace(R.id.main_view, fragment).commit();
+                        fbStore.collection("order").document(documentReference.getId())
+                                .update("documentId", documentReference.getId())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getContext(), "order success", Toast.LENGTH_SHORT).show();
+                                        Fragment fragment = new StatusFragment();
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable("User object", user);
+                                        bundle.putSerializable("Shop object", shop);
+                                        fragment.setArguments(bundle);
+                                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                        ft.replace(R.id.main_view, fragment).commit();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressBar.setVisibility(View.GONE);
+                                Log.d("cafe", "add documentId to firebase error : " + e.getMessage());
+                                Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
