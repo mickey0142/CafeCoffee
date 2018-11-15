@@ -59,7 +59,6 @@ public class CustomerHomeFragment extends Fragment {
 
         initLogoutButton();
         initShopList();
-        initProfileButton();
     }
 
     void initLogoutButton()
@@ -126,20 +125,4 @@ public class CustomerHomeFragment extends Fragment {
         });
     }
 
-    void initProfileButton()
-    {
-        Button profileButton = getView().findViewById(R.id.customer_home_profile_button);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new ProfileFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("User object", user);
-                fragment.setArguments(bundle);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.replace(R.id.main_view, fragment).addToBackStack(null).commit();
-            }
-        });
-    }
 }
