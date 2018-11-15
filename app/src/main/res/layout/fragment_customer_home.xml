@@ -22,12 +22,6 @@
                 android:layout_height="wrap_content"
                 android:text="log out"/>
 
-            <Button
-                android:id="@+id/customer_home_profile_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="profile"/>
-
             <ProgressBar
                 android:id="@+id/customer_home_progress_bar"
                 android:layout_width="wrap_content"
