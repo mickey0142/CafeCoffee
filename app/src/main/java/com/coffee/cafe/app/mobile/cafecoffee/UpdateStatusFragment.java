@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,9 +24,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -42,6 +46,7 @@ public class UpdateStatusFragment extends Fragment {
 
     FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fbStore = FirebaseFirestore.getInstance();
+    FirebaseStorage fbStorage = FirebaseStorage.getInstance();
     User user;
     Shop shop;
     Order order;
@@ -73,10 +78,37 @@ public class UpdateStatusFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        initCustomerPicture();
         initText();
         initBeverageList();
         initStatusButton();
         initUpdateButton();
+    }
+
+    void initCustomerPicture()
+    {
+        fbStore.collection("user").whereEqualTo("username", order.getCustomerName()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful())
+                        {
+                            for (DocumentSnapshot doc : task.getResult())
+                            {
+                                String pictureName = doc.getString("pictureName");
+                                ImageView customerPicture = getView().findViewById(R.id.update_status_customer_picture);
+                                StorageReference imageRef = fbStorage.getReferenceFromUrl("gs://cafe-coffee-576ed.appspot.com")
+                                        .child(pictureName);
+                                GlideApp.with(getContext()).load(imageRef).into(customerPicture);
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(), "Error : " + task.getException(), Toast.LENGTH_SHORT).show();
+                            Log.d("cafe", "get user error : " + task.getException());
+                        }
+                    }
+                });
     }
 
     void initText()
