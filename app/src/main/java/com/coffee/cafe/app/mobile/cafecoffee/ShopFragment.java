@@ -180,7 +180,7 @@ public class ShopFragment extends Fragment {
         beverage.setAmount(1);
         LinearLayout linearLayout = getView().findViewById(layoutId);
         final TextView price = linearLayout.findViewById(R.id.option_price);
-        String priceStr = "Price : " + beverage.getPrice();
+        String priceStr = beverage.getPrice() + " ฿";
         if (beverage.getAmount() > 1)
         {
             priceStr += " X " + beverage.getAmount() + " = " + beverage.getPrice("total");
