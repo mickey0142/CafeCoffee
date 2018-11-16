@@ -3,10 +3,12 @@ package Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,12 +45,26 @@ public class OrderAdapter extends ArrayAdapter {
         time.setText("Order Time : " + order.orderTimeReverse());
         TextView sumPrice = orderList.findViewById(R.id.order_item_sum_price);
         int num = order.getSumPrice();
-        sumPrice.setText("Total Price : " + num);
+        sumPrice.setText("Total Price : " + num + " ฿");
+        ImageView statusIcon = orderList.findViewById(R.id.order_item_status_icon);
+        if (order.getStatus().equals("in queue"))
+        {
+            statusIcon.setImageResource(R.drawable.status_inqueue);
+        }
+        else if (order.getStatus().equals("in progress"))
+        {
+            statusIcon.setImageResource(R.drawable.status_inprogrss);
+        }
+        else if (order.getStatus().equals("done"))
+        {
+            statusIcon.setImageResource(R.drawable.status_done);
+        }
         ListView beverageList = orderList.findViewById(R.id.order_item_list);
         BeverageAdapter beverageAdapter = new BeverageAdapter(context, R.layout.fragment_beverage_item, order.getBeverages());
         beverageList.setAdapter(beverageAdapter);
-        ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, convertToPixel(60*order.getBeverages().size()));
+        ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, convertToPixel(70*order.getBeverages().size()));
         beverageList.setLayoutParams(layoutParams);
+        beverageList.setFooterDividersEnabled(false);
         return orderList;
     }
 

@@ -20,6 +20,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/shop_back_button"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -36,25 +37,12 @@
                     android:paddingLeft="20dp"/>
 
                 <ImageView
+                    android:id="@+id/shop_cart_button"
                     android:layout_width="64dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:src="@drawable/cart" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/shop_status_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="status" />
-
-            <Button
-                android:id="@+id/shop_cart_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="cart" />
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -305,11 +293,20 @@
                     android:visibility="gone" />
             </LinearLayout>
 
+            <TextView
+                android:text="Shop Location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:layout_marginTop="16dp"/>
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/shop_map_view"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp"
+                android:layout_margin="16dp"/>
         </LinearLayout>
     </ScrollView>
 
@@ -321,6 +318,7 @@
         android:elevation="10dp"
         android:background="@drawable/nav_border">
         <LinearLayout
+            android:id="@+id/shop_nav_shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -339,6 +337,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/shop_nav_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -357,6 +356,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/shop_nav_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

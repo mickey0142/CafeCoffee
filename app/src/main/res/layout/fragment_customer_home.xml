@@ -21,12 +21,6 @@
                 android:textSize="30dp"
                 android:textAlignment="center"/>
 
-            <Button
-                android:id="@+id/customer_home_logout_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="log out"/>
-
             <ProgressBar
                 android:id="@+id/customer_home_progress_bar"
                 android:layout_width="wrap_content"
@@ -52,6 +46,7 @@
         android:elevation="10dp"
         android:background="@drawable/nav_border">
         <LinearLayout
+            android:id="@+id/customer_home_nav_shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -70,6 +65,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/customer_home_nav_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -88,6 +84,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/customer_home_nav_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -96,7 +93,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/profile_page"/>
+                android:src="@drawable/logout"/>
             <TextView
                 android:textColor="#000"
                 android:layout_width="wrap_content"

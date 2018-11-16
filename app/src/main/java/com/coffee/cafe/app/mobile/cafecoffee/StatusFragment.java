@@ -1,13 +1,17 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,7 +35,6 @@ public class StatusFragment extends Fragment {
     FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fbStore = FirebaseFirestore.getInstance();
     User user;
-    Shop shop;
     ArrayList<Order> order = new ArrayList<>();
 
     @Override
@@ -40,7 +43,6 @@ public class StatusFragment extends Fragment {
         this.setRetainInstance(true);
         Bundle bundle = getArguments();
         user = (User) bundle.getSerializable("User object");
-//        shop = (Shop) bundle.getSerializable("Shop object");
         Log.d("test", "user : " + user);
     }
 
@@ -58,7 +60,21 @@ public class StatusFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        checkAuthen();
         initOrderList();
+        initNavBar();
+    }
+
+    void checkAuthen()
+    {
+        if (fbAuth.getCurrentUser() == null)
+        {
+            Log.d("cafe", "not logged in return to login page");
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_view, new LoginFragment())
+                    .commit();
+        }
     }
 
     void initOrderList()
@@ -98,5 +114,48 @@ public class StatusFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    void initNavBar()
+    {
+        LinearLayout navShop = getView().findViewById(R.id.status_nav_shop);
+        LinearLayout navLogout = getView().findViewById(R.id.status_nav_logout);
+        navShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                Fragment homeFragment = new CustomerHomeFragment();
+                homeFragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, homeFragment).addToBackStack(null).commit();
+            }
+        });
+        navLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbAuth.signOut();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Do you want log out ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: dialog show.");
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_view, new LoginFragment())
+                                .commit();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: not active.");
+                    }
+                });
+                builder.show();
+            }
+        });
     }
 }

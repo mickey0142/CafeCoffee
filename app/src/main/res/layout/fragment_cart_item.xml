@@ -26,14 +26,6 @@
                 android:layout_height="wrap_content"
                 android:text="abcdef"
                 android:textSize="15dp"/>
-            <TextView
-                android:id="@+id/cart_item_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
-                android:text="abcdef"
-                android:textSize="15dp"/>
-
 
         </LinearLayout>
 
@@ -43,7 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="16dp">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp">
         <Button
             android:id="@+id/cart_item_increase_amount"
             android:layout_width="wrap_content"
@@ -69,11 +63,12 @@
 
 
     <TextView
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:id="@+id/cart_item_more_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="no additional detail"
-        android:background="@drawable/border_textinput"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 </LinearLayout>

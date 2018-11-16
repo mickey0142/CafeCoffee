@@ -74,11 +74,24 @@ public class ShopOwnerHomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        checkAuthen();
         initWelcomeText();
         initEditPriceButton();
         initLogoutButton();
         initOrderList();
         initSetShopLocationButton();
+    }
+
+    void checkAuthen()
+    {
+        if (fbAuth.getCurrentUser() == null)
+        {
+            Log.d("cafe", "not logged in return to login page");
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_view, new LoginFragment())
+                    .commit();
+        }
     }
 
     void initWelcomeText()

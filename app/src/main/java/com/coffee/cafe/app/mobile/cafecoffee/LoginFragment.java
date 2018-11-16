@@ -78,14 +78,23 @@ public class LoginFragment extends Fragment {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User("scholarsbright15@gmail.com", "mickey", "customer");
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("User object", user);
-                Fragment homeFragment = new CustomerHomeFragment();
-                homeFragment.setArguments(bundle);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.replace(R.id.main_view, homeFragment).commit();
+                fbAuth.signInWithEmailAndPassword("scholarsbright15@gmail.com", "asdfgh")
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful())
+                        {
+                            User user = new User("scholarsbright15@gmail.com", "mickey", "customer");
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("User object", user);
+                            Fragment homeFragment = new CustomerHomeFragment();
+                            homeFragment.setArguments(bundle);
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                            ft.replace(R.id.main_view, homeFragment).commit();
+                        }
+                    }
+                });
             }
         });
         initEnterPressed();

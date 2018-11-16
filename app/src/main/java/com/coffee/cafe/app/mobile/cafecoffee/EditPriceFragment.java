@@ -55,8 +55,21 @@ public class EditPriceFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        checkAuthen();
         initText();
         initUpdateButton();
+    }
+
+    void checkAuthen()
+    {
+        if (fbAuth.getCurrentUser() == null)
+        {
+            Log.d("cafe", "not logged in return to login page");
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_view, new LoginFragment())
+                    .commit();
+        }
     }
 
     void initText()

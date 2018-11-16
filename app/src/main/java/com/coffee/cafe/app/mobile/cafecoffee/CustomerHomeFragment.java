@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -59,35 +60,21 @@ public class CustomerHomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        initLogoutButton();
+        checkAuthen();
         initShopList();
+        initNavBar();
     }
 
-    void initLogoutButton()
+    void checkAuthen()
     {
-        Button logoutButton = getView().findViewById(R.id.customer_home_logout_button);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fbAuth.signOut();
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Do you want EXIT");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("cafe", "ERROR: dialog show.");
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).commit();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("cafe", "ERROR: not active.");
-                    }
-                });
-                builder.show();
-            }
-        });
+        if (fbAuth.getCurrentUser() == null)
+        {
+            Log.d("cafe", "not logged in return to login page");
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_view, new LoginFragment())
+                    .commit();
+        }
     }
 
     void initShopList()
@@ -116,7 +103,7 @@ public class CustomerHomeFragment extends Fragment {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Fragment fragment = new ShopFragment();
                                 Bundle bundle = new Bundle();
-                                Log.d("test", shopList.get(position).toString());
+                                Log.d("cafe", shopList.get(position).toString());
                                 bundle.putSerializable("Shop object", shopList.get(position));
                                 bundle.putSerializable("User object", user);
                                 fragment.setArguments(bundle);
@@ -139,4 +126,46 @@ public class CustomerHomeFragment extends Fragment {
         });
     }
 
+    void initNavBar()
+    {
+        LinearLayout navStatus = getView().findViewById(R.id.customer_home_nav_status);
+        LinearLayout navLogout = getView().findViewById(R.id.customer_home_nav_logout);
+        navStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new StatusFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                fragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, fragment).addToBackStack(null).commit();
+            }
+        });
+        navLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbAuth.signOut();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Do you want log out ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: dialog show.");
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_view, new LoginFragment())
+                                .commit();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: not active.");
+                    }
+                });
+                builder.show();
+            }
+        });
+    }
 }

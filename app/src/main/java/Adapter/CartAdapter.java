@@ -46,13 +46,11 @@ public class CartAdapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View cartItem = LayoutInflater.from(context).inflate(R.layout.fragment_cart_item, parent, false);
         TextView name = cartItem.findViewById(R.id.cart_item_name);
-        TextView price = cartItem.findViewById(R.id.cart_item_price);
         TextView sumPrice = cartItem.findViewById(R.id.cart_item_sum_price);
         TextView moreDetail = cartItem.findViewById(R.id.cart_item_more_detail);
         final Beverage beverage = beverages.get(position);
         name.setText(beverage.getType() + " " + beverage.getName() + " " + beverage.getSize());
-        price.setText(beverage.getPrice()+"");
-        sumPrice.setText("Total Price : " + beverage.getPrice() + " X " + beverage.getAmount() + " = " + beverage.getPrice("total"));
+        sumPrice.setText("Total Price : " + beverage.getPrice() + " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿");
         moreDetail.setText(beverage.getMoreDetail());
         Button removeButton = cartItem.findViewById(R.id.cart_item_remove_button);
         final int pos = position;
@@ -62,7 +60,7 @@ public class CartAdapter extends ArrayAdapter {
             public void onClick(View v) {
                 beverages.remove(pos);
                 int num = order.getSumPrice();
-                cartPrice.setText("Total Price : " + num);
+                cartPrice.setText("Total Price : " + num + " ฿");
                 temp.notifyDataSetChanged();
             }
         });

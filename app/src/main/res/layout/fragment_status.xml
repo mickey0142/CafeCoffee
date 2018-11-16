@@ -27,18 +27,21 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/status_done" />
+                    android:src="@drawable/status_inqueue"
+                    android:layout_weight="1"/>
+
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/status_inprogrss"
                     android:layout_weight="1"/>
+
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/status_paid"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:src="@drawable/status_done" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -49,25 +52,25 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="In queue"
+                    android:layout_weight="1.1"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="In progress"
+                    android:textStyle="bold"
+                    android:layout_weight="0.8"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Done"
-                    android:layout_weight="1"
                     android:textStyle="bold"
-                    android:textAlignment="center"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="inprogrss"
-                    android:textStyle="bold"
-                    android:layout_weight="1"
-                    android:textAlignment="center"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Paid"
-                    android:textStyle="bold"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:textAlignment="center"/>
 
             </LinearLayout>
@@ -77,7 +80,9 @@
                 android:id="@+id/status_order_list"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:nestedScrollingEnabled="true"></ListView>
+                android:nestedScrollingEnabled="true"
+                android:headerDividersEnabled="false"
+                android:footerDividersEnabled="false"></ListView>
 
         </LinearLayout>
     </ScrollView>
@@ -90,6 +95,7 @@
         android:elevation="10dp"
         android:background="@drawable/nav_border">
         <LinearLayout
+            android:id="@+id/status_nav_shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -126,6 +132,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/status_nav_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

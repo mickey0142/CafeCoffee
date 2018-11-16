@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -35,9 +36,13 @@ public class BeverageAdapter extends ArrayAdapter {
         TextView name = beverageList.findViewById(R.id.beverage_item_name);
         TextView sumPrice = beverageList.findViewById(R.id.beverage_item_sum_price);
         TextView moreDetail = beverageList.findViewById(R.id.beverage_item_more_detail);
-        name.setText("Name : " + beverage.getType() + " " + beverage.getName() + " " + beverage.getSize());
-        sumPrice.setText("Total Price : " + beverage.getPrice() + " X " + beverage.getAmount() + " = " + beverage.getPrice("total"));
+        name.setText("Menu : " + beverage.getType() + " " + beverage.getName() + " " + beverage.getSize());
+        sumPrice.setText("Price : " + beverage.getPrice() + " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿");
         moreDetail.setText(beverage.getMoreDetail());
+        if (position % 2 == 1)
+        {
+            beverageList.setBackgroundColor(Color.parseColor("#EEEEEE"));
+        }
         return beverageList;
     }
 }

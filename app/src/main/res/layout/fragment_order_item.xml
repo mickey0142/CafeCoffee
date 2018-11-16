@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"/>
         <ImageView
+            android:id="@+id/order_item_status_icon"
             android:layout_marginLeft="10dp"
             android:layout_width="16dp"
             android:layout_height="16dp"
@@ -33,7 +34,10 @@
         android:id="@+id/order_item_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="true">
+        android:nestedScrollingEnabled="true"
+        android:headerDividersEnabled="false"
+        android:footerDividersEnabled="false"
+        android:dividerHeight="0dp">
     </ListView>
 
     <TextView

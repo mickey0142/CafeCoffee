@@ -11,16 +11,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/cart_back_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_back_arrow" />
+
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
+                android:layout_marginTop="-65dp"
                 android:src="@drawable/cart"/>
 
             <ListView
                 android:id="@+id/cart_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:nestedScrollingEnabled="true"
                 android:layout_margin="16dp"
                 >
@@ -32,7 +41,10 @@
                 android:id="@+id/cart_sum_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="textEnd"/>
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:text="Total Price : 10"/>
 
             <ProgressBar
                 android:id="@+id/cart_progress_bar"
@@ -59,6 +71,7 @@
         android:elevation="10dp"
         android:background="@drawable/nav_border">
         <LinearLayout
+            android:id="@+id/cart_nav_shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -77,6 +90,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cart_nav_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -95,6 +109,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cart_nav_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

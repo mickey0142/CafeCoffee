@@ -1,6 +1,8 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
 import android.animation.Animator;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +78,8 @@ public class ShopFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        initStatusButton();
+        checkAuthen();
+        initBackButton();
         initCartButton();
         initCappuccino();
         initEspresso();
@@ -85,29 +89,35 @@ public class ShopFragment extends Fragment {
         initMocha();
         initCocoa();
         initMapView(savedInstanceState);
+        initNavBar();
     }
 
-    void initStatusButton()
+    void checkAuthen()
     {
-        Button statusButton = getView().findViewById(R.id.shop_status_button);
-        statusButton.setOnClickListener(new View.OnClickListener() {
+        if (fbAuth.getCurrentUser() == null)
+        {
+            Log.d("cafe", "not logged in return to login page");
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_view, new LoginFragment())
+                    .commit();
+        }
+    }
+
+    void initBackButton()
+    {
+        ImageView backButton = getView().findViewById(R.id.shop_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new StatusFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("User object", user);
-                bundle.putSerializable("Shop object", shop);
-                fragment.setArguments(bundle);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.replace(R.id.main_view, fragment).addToBackStack(null).commit();
+                getFragmentManager().popBackStack();
             }
         });
     }
 
     void initCartButton()
     {
-        Button cartButton = getView().findViewById(R.id.shop_cart_button);
+        ImageView cartButton = getView().findViewById(R.id.shop_cart_button);
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -405,6 +415,62 @@ public class ShopFragment extends Fragment {
                     Toast.makeText(getContext(), "can't get shop location" + e.getMessage(), Toast.LENGTH_LONG).show();
                     mapView.setVisibility(View.GONE);
                 }
+            }
+        });
+    }
+
+    void initNavBar()
+    {
+        LinearLayout navShop = getView().findViewById(R.id.shop_nav_shop);
+        LinearLayout navStatus = getView().findViewById(R.id.shop_nav_status);
+        LinearLayout navLogout = getView().findViewById(R.id.shop_nav_logout);
+        navShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                Fragment homeFragment = new CustomerHomeFragment();
+                homeFragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, homeFragment).addToBackStack(null).commit();
+            }
+        });
+        navStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new StatusFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                fragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, fragment).addToBackStack(null).commit();
+            }
+        });
+        navLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbAuth.signOut();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Do you want log out ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: dialog show.");
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_view, new LoginFragment())
+                                .commit();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: not active.");
+                    }
+                });
+                builder.show();
             }
         });
     }
