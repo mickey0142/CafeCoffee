@@ -146,20 +146,20 @@ public class UpdateStatusFragment extends Fragment {
     void initStatusButton()
     {
         setButtonColor();
-        final Button inQueueButton = getView().findViewById(R.id.update_status_in_queue_button);
+//        final Button inQueueButton = getView().findViewById(R.id.update_status_in_queue_button);
         final Button inProgressButton = getView().findViewById(R.id.update_status_in_progress_button);
         final Button doneButton = getView().findViewById(R.id.update_status_done_button);
         final Button paidButton = getView().findViewById(R.id.update_status_paid_button);
         final CheckBox checkBox = getView().findViewById(R.id.update_status_save_log);
-        inQueueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                status = "in queue";
-                checkBox.setVisibility(View.GONE);
-                checkBox.setChecked(false);
-                setButtonColor();
-            }
-        });
+//        inQueueButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                status = "in queue";
+//                checkBox.setVisibility(View.GONE);
+//                checkBox.setChecked(false);
+//                setButtonColor();
+//            }
+//        });
         inProgressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,37 +191,37 @@ public class UpdateStatusFragment extends Fragment {
 
     void setButtonColor()
     {
-        final Button inQueueButton = getView().findViewById(R.id.update_status_in_queue_button);
+//        final Button inQueueButton = getView().findViewById(R.id.update_status_in_queue_button);
         final Button inProgressButton = getView().findViewById(R.id.update_status_in_progress_button);
         final Button doneButton = getView().findViewById(R.id.update_status_done_button);
         final Button paidButton = getView().findViewById(R.id.update_status_paid_button);
-        if (status.equals("in queue"))
+//        if (status.equals("in queue"))
+//        {
+//            inQueueButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+//            inProgressButton.setBackgroundResource(R.drawable.border_button);
+//            doneButton.setBackgroundResource(R.drawable.actived_button);
+//            paidButton.setBackgroundResource(R.drawable.actived_button);
+//        }
+        if (status.equals("in progress"))
         {
-            inQueueButton.setBackgroundColor(Color.parseColor("#FFFF00"));
-            inProgressButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            doneButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            paidButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-        }
-        else if (status.equals("in progress"))
-        {
-            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            inProgressButton.setBackgroundColor(Color.parseColor("#FFFF00"));
-            doneButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            paidButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+//            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+            inProgressButton.setBackgroundResource(R.drawable.border_button);
+            doneButton.setBackgroundResource(R.drawable.actived_button);
+            paidButton.setBackgroundResource(R.drawable.actived_button);
         }
         else if (status.equals("done"))
         {
-            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            inProgressButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            doneButton.setBackgroundColor(Color.parseColor("#FFFF00"));
-            paidButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+//            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+            inProgressButton.setBackgroundResource(R.drawable.actived_button);
+            doneButton.setBackgroundResource(R.drawable.border_button);
+            paidButton.setBackgroundResource(R.drawable.actived_button);
         }
         else if (status.equals("paid"))
         {
-            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            inProgressButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            doneButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            paidButton.setBackgroundColor(Color.parseColor("#FFFF00"));
+//            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
+            inProgressButton.setBackgroundResource(R.drawable.actived_button);
+            doneButton.setBackgroundResource(R.drawable.actived_button);
+            paidButton.setBackgroundResource(R.drawable.border_button);
         }
     }
 

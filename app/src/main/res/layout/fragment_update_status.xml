@@ -1,25 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Update status"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textColor="#84410D"/>
     <ImageView
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
         android:id="@+id/update_status_customer_picture"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:background="@drawable/picture_border"/>
 
     <TextView
+        android:layout_marginTop="15dp"
         android:id="@+id/update_status_customer_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="name"/>
-
-    <TextView
-        android:id="@+id/update_status_status"
+        android:text="name"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#000"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="status"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/update_status_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="status"/>
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_width="16dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/status_inprogrss"
+            />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/update_status_order_time"
@@ -30,9 +65,11 @@
     <ListView
         android:id="@+id/update_status_beverage_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content">
+    </ListView>
 
     <TextView
+        android:gravity="end"
         android:id="@+id/update_status_sum_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,31 +78,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/update_status_in_queue_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="in queue"/>
-
-        <Button
-            android:id="@+id/update_status_in_progress_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="in progress"/>
-
-        <Button
-            android:id="@+id/update_status_done_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="done"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <Button
             android:id="@+id/update_status_paid_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="paid"/>
+            android:text="paid"
+            android:textColor="#fff"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/update_status_in_progress_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="in progress"
+            android:textColor="#fff"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/update_status_done_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="done"
+            android:textColor="#fff"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"/>
+
+
 
     </LinearLayout>
 
@@ -88,6 +129,76 @@
         android:id="@+id/update_status_update_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="update"/>
+        android:text="update"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border_button"/>
+    </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:background="@drawable/nav_border">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/shop_page"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Order"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="36dp"
+                android:src="@drawable/edit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:textColor="#000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/exit"/>
+            <TextView
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

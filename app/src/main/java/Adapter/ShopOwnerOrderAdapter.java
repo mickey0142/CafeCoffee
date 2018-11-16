@@ -33,11 +33,11 @@ public class ShopOwnerOrderAdapter extends ArrayAdapter {
         View orderList = LayoutInflater.from(context).inflate(R.layout.fragment_shop_owner_order_item, parent, false);
         TextView customerName = orderList.findViewById(R.id.shop_owner_order_customer_name);
         TextView time = orderList.findViewById(R.id.shop_owner_order_time);
-        TextView status = orderList.findViewById(R.id.shop_owner_order_status);
+//        TextView status = orderList.findViewById(R.id.shop_owner_order_status);
         Order order = orders.get(position);
         customerName.setText("Customer name : " + order.getCustomerName());
         time.setText("Order time : " + order.orderTimeReverse());
-        status.setText("Status : " + order.getStatus());
+//        status.setText("Status : " + order.getStatus());
         return orderList;
     }
 }
