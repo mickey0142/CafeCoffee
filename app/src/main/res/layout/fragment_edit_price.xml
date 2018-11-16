@@ -32,7 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Cappuccino price" />
+            android:hint="Cappuccino price"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
@@ -45,7 +46,7 @@
         android:gravity="center">
 
         <TextView
-            android:text="Espresso price : "
+            android:text="Espresso price     : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"
@@ -56,7 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Espresso price"/>
+            android:hint="Cappuccino price"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
@@ -69,7 +71,7 @@
         android:gravity="center">
 
         <TextView
-            android:text="Americano price : "
+            android:text="Americano price  : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"/>
@@ -79,7 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Americano price"/>
+            android:hint="Cappuccino price"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
@@ -92,7 +95,7 @@
         android:gravity="center">
 
         <TextView
-            android:text="Macchiato price : "
+            android:text="Macchiato price  : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"/>
@@ -102,7 +105,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Macchiato price"/>
+            android:hint="Cappuccino price"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
@@ -115,7 +119,7 @@
         android:gravity="center">
 
         <TextView
-            android:text="Latte price : "
+            android:text="Latte price           : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"/>
@@ -125,7 +129,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Latte price"/>
+            android:hint="Cappuccino price"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
@@ -138,7 +143,7 @@
         android:gravity="center">
 
         <TextView
-            android:text="Mocha price : "
+            android:text="Mocha price        : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"/>
@@ -148,7 +153,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Mocha price"/>
+            android:hint="Cappuccino price"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
@@ -161,7 +167,7 @@
         android:gravity="center">
 
         <TextView
-            android:text="Cocoa price : "
+            android:text="Cocoa price         : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"/>
@@ -171,7 +177,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Cocoa price"/>
+            android:hint="Cappuccino price"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 

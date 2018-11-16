@@ -33,12 +33,6 @@
             android:textColor="#000"
             android:textStyle="bold"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
-                android:src="@drawable/status_done" />
-
     </LinearLayout>
     </LinearLayout>
 

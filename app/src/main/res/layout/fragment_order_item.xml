@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/picture_border"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:layout_marginTop="10dp">
 
     <TextView
         android:id="@+id/order_item_shop_name"

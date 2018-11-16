@@ -35,7 +35,7 @@ public class BeverageAdapter extends ArrayAdapter {
         TextView name = beverageList.findViewById(R.id.beverage_item_name);
         TextView sumPrice = beverageList.findViewById(R.id.beverage_item_sum_price);
         TextView moreDetail = beverageList.findViewById(R.id.beverage_item_more_detail);
-        name.setText(beverage.getType() + " " + beverage.getName() + " " + beverage.getSize());
+        name.setText("Name : " + beverage.getType() + " " + beverage.getName() + " " + beverage.getSize());
         sumPrice.setText("Total Price : " + beverage.getPrice() + " X " + beverage.getAmount() + " = " + beverage.getPrice("total"));
         moreDetail.setText(beverage.getMoreDetail());
         return beverageList;
