@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,9 @@ public class BeverageAdapter extends ArrayAdapter {
         name.setText("Menu : " + beverage.getType() + " " + beverage.getName() + " " + beverage.getSize());
         sumPrice.setText("Price : " + beverage.getPrice() + " X " + beverage.getAmount() + " = " + beverage.getPrice("total") + " ฿");
         moreDetail.setText(beverage.getMoreDetail());
+        Log.d("cafe", "price : " + beverage.getPrice());
+        Log.d("cafe", "amount : " + beverage.getAmount());
+        Log.d("cafe", "total : " + beverage.getPrice("total"));
         if (position % 2 == 1)
         {
             beverageList.setBackgroundColor(Color.parseColor("#EEEEEE"));

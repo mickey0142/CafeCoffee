@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:text="status"/>
         <ImageView
+            android:id="@+id/update_status_status_icon"
             android:layout_marginLeft="10dp"
             android:layout_width="16dp"
             android:layout_height="match_parent"
@@ -65,7 +66,8 @@
     <ListView
         android:id="@+id/update_status_beverage_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="true">
     </ListView>
 
     <TextView

@@ -24,6 +24,7 @@
             android:layout_height="match_parent"
             android:gravity="end">
             <ImageView
+                android:id="@+id/status_icon"
                 android:layout_width="16dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/status_inprogrss"

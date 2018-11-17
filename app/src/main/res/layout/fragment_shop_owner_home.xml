@@ -38,7 +38,8 @@
                 android:layout_marginTop="5dp"
                 android:id="@+id/shop_owner_order_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="400dp"
+                android:nestedScrollingEnabled="true"></ListView>
 
         </LinearLayout>
     </ScrollView>

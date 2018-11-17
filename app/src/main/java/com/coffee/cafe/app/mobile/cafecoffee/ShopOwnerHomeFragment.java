@@ -29,6 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 import Adapter.ShopOwnerOrderAdapter;
+import Model.Beverage;
 import Model.Order;
 import Model.Shop;
 import Model.User;
@@ -48,6 +49,7 @@ public class ShopOwnerHomeFragment extends Fragment {
         user = (User) bundle.getSerializable("User object");
         shop = (Shop) bundle.getSerializable("Shop object");
         Log.d("test", "user : " + user);
+        Beverage.setMenuPrice(shop.getMenuPrice());
     }
 
     @Nullable

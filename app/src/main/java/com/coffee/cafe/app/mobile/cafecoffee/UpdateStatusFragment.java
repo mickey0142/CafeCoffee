@@ -116,11 +116,17 @@ public class UpdateStatusFragment extends Fragment {
                         {
                             for (DocumentSnapshot doc : task.getResult())
                             {
-                                String pictureName = doc.getString("pictureName");
-                                ImageView customerPicture = getView().findViewById(R.id.update_status_customer_picture);
-                                StorageReference imageRef = fbStorage.getReferenceFromUrl("gs://cafe-coffee-576ed.appspot.com")
-                                        .child(pictureName);
-                                GlideApp.with(getContext()).load(imageRef).into(customerPicture);
+                                try {
+                                    String pictureName = doc.getString("pictureName");
+                                    ImageView customerPicture = getView().findViewById(R.id.update_status_customer_picture);
+                                    StorageReference imageRef = fbStorage.getReferenceFromUrl("gs://cafe-coffee-576ed.appspot.com")
+                                            .child(pictureName);
+                                    GlideApp.with(getContext()).load(imageRef).into(customerPicture);
+                                }
+                                catch (NullPointerException e)
+                                {
+                                    Log.d("cafe", "catch NullPointerException : " + e .getMessage());
+                                }
                             }
                         }
                         else
@@ -149,6 +155,15 @@ public class UpdateStatusFragment extends Fragment {
         ListView beverageList = getView().findViewById(R.id.update_status_beverage_list);
         BeverageAdapter adapter = new BeverageAdapter(getActivity(), R.layout.fragment_beverage_item, order.getBeverages());
         beverageList.setAdapter(adapter);
+        ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, convertToPixel(70*order.getBeverages().size()));
+        beverageList.setLayoutParams(layoutParams);
+    }
+
+    public int convertToPixel(double dp)
+    {
+        float scale = getContext().getResources().getDisplayMetrics().density;
+        int pixel = (int) (dp * scale + 0.5f);
+        return pixel;
     }
 
     void initStatusButton()
@@ -203,6 +218,7 @@ public class UpdateStatusFragment extends Fragment {
         final Button inProgressButton = getView().findViewById(R.id.update_status_in_progress_button);
         final Button doneButton = getView().findViewById(R.id.update_status_done_button);
         final Button paidButton = getView().findViewById(R.id.update_status_paid_button);
+        final ImageView statusIcon = getView().findViewById(R.id.update_status_status_icon);
 //        if (status.equals("in queue"))
 //        {
 //            inQueueButton.setBackgroundColor(Color.parseColor("#FFFF00"));
@@ -210,12 +226,20 @@ public class UpdateStatusFragment extends Fragment {
 //            doneButton.setBackgroundResource(R.drawable.actived_button);
 //            paidButton.setBackgroundResource(R.drawable.actived_button);
 //        }
-        if (status.equals("in progress"))
+        if (status.equals("in queue"))
+        {
+            inProgressButton.setBackgroundResource(R.drawable.actived_button);
+            doneButton.setBackgroundResource(R.drawable.actived_button);
+            paidButton.setBackgroundResource(R.drawable.actived_button);
+            statusIcon.setImageResource(R.drawable.status_inqueue);
+        }
+        else if (status.equals("in progress"))
         {
 //            inQueueButton.setBackgroundColor(Color.parseColor("#DDDDDD"));
             inProgressButton.setBackgroundResource(R.drawable.border_button);
             doneButton.setBackgroundResource(R.drawable.actived_button);
             paidButton.setBackgroundResource(R.drawable.actived_button);
+            statusIcon.setImageResource(R.drawable.status_inprogrss);
         }
         else if (status.equals("done"))
         {
@@ -223,6 +247,7 @@ public class UpdateStatusFragment extends Fragment {
             inProgressButton.setBackgroundResource(R.drawable.actived_button);
             doneButton.setBackgroundResource(R.drawable.border_button);
             paidButton.setBackgroundResource(R.drawable.actived_button);
+            statusIcon.setImageResource(R.drawable.status_done);
         }
         else if (status.equals("paid"))
         {
