@@ -1,14 +1,21 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -163,6 +171,10 @@ public class EditPriceFragment extends Fragment {
         setLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+                }
                 progressBar2.setVisibility(View.VISIBLE);
                 try {
                     MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -181,11 +193,69 @@ public class EditPriceFragment extends Fragment {
                                         shopPosition.put("latitude", location.getLatitude());
                                         shopPosition.put("longitude", location.getLongitude());
                                         shop.setShopPosition(shopPosition);
+                                        fbStore.collection("shop").document(shop.getShopName()).set(shop)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        progressBar2.setVisibility(View.GONE);
+                                                        Log.d("cafe", "set location success");
+                                                        Toast.makeText(getContext(), "set location success", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                progressBar2.setVisibility(View.GONE);
+                                                Log.d("cafe", "add shop error : " + e.getMessage());
+                                                Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                     }
                                     else
                                     {
                                         Log.d("cafe", "location is null in shopOwnerHomeFragment" + location + fusedLocationClient);
-                                        Toast.makeText(getContext(), "set shop location fail (error code = 1)", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getContext(), "get location fail retrying ...", Toast.LENGTH_LONG).show();
+                                        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                                        locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
+                                            @Override
+                                            public void onLocationChanged(Location location) {
+                                                HashMap<String, Double> shopPosition = new HashMap<>();
+                                                shopPosition.put("latitude", location.getLatitude());
+                                                shopPosition.put("longitude", location.getLongitude());
+                                                shop.setShopPosition(shopPosition);
+                                                Log.d("cafe", "request new location complete");
+                                                fbStore.collection("shop").document(shop.getShopName()).set(shop)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                progressBar2.setVisibility(View.GONE);
+                                                                Log.d("cafe", "set location success");
+                                                                Toast.makeText(getContext(), "set location success", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        progressBar2.setVisibility(View.GONE);
+                                                        Log.d("cafe", "add shop error : " + e.getMessage());
+                                                        Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            }
+
+                                            @Override
+                                            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                                            }
+
+                                            @Override
+                                            public void onProviderEnabled(String provider) {
+
+                                            }
+
+                                            @Override
+                                            public void onProviderDisabled(String provider) {
+
+                                            }
+                                        }, null);
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -194,26 +264,6 @@ public class EditPriceFragment extends Fragment {
                             progressBar2.setVisibility(View.GONE);
                             Log.d("cafe", "get last location fail : " + e.getMessage());
                             Toast.makeText(getContext(), "set shop location fail (error code = 2)", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Location>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Location> task) {
-                            fbStore.collection("shop").document(shop.getShopName()).set(shop)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            progressBar2.setVisibility(View.GONE);
-                                            Log.d("cafe", "set location success");
-                                            Toast.makeText(getContext(), "set location success", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    progressBar2.setVisibility(View.GONE);
-                                    Log.d("cafe", "add shop error : " + e.getMessage());
-                                    Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
                         }
                     });
                 }

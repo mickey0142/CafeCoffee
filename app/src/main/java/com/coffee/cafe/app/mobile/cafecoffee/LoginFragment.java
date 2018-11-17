@@ -135,7 +135,7 @@ public class LoginFragment extends Fragment {
                 imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
                 EditText email = getView().findViewById(R.id.login_email);
                 EditText password = getView().findViewById(R.id.login_password);
-                final String emailStr = email.getText().toString();
+                final String emailStr = email.getText().toString().trim();
                 String passwordStr = password.getText().toString();
                 if (emailStr.isEmpty() || passwordStr.isEmpty())
                 {

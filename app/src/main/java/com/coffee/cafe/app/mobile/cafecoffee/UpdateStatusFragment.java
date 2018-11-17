@@ -1,14 +1,18 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -249,6 +253,10 @@ public class UpdateStatusFragment extends Fragment {
                                         Log.d("cafe", "document id : " + document.getId());
                                         if (status.equals("paid"))
                                         {
+                                            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                                            {
+                                                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                                            }
                                             Order order = document.toObject(Order.class);
                                             saveOrderInTextFile(order);
                                             fbStore.collection("order").document(document.getId()).delete()

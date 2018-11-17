@@ -1,7 +1,9 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -12,7 +14,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -225,6 +229,10 @@ public class RegisterFragment extends Fragment {
 
     void initChooseProfilePictureButton()
     {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+        }
         Button chooseButton = getView().findViewById(R.id.register_choose_picture);
         chooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,6 +250,10 @@ public class RegisterFragment extends Fragment {
 
     void initChooseShopPictureButton()
     {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+        }
         Button chooseButton = getView().findViewById(R.id.register_shop_choose_picture);
         chooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,6 +271,14 @@ public class RegisterFragment extends Fragment {
 
     void initProfileOpenCameraButton()
     {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0);
+        }
         Button openCameraButton = getView().findViewById(R.id.register_camera_button);
         openCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +291,14 @@ public class RegisterFragment extends Fragment {
 
     void initShopOpenCameraButton()
     {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0);
+        }
         Button openCameraButton = getView().findViewById(R.id.register_shop_camera_button);
         openCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
