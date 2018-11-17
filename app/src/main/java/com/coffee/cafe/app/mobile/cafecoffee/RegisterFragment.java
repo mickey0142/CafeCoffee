@@ -446,14 +446,14 @@ public class RegisterFragment extends Fragment {
     void uploadShopData()
     {
         EditText shopName = getView().findViewById(R.id.register_shop_name);
-        EditText location = getView().findViewById(R.id.register_location);
+        EditText shopDescription = getView().findViewById(R.id.register_shop_description);
         final String shopNameStr = shopName.getText().toString();
-        String locationStr = location.getText().toString();
+        String shopDescriptionStr = shopDescription.getText().toString();
         EditText username = getView().findViewById(R.id.register_username);
         String usernameStr = username.getText().toString();
         final Shop shop = new Shop();
         shop.setShopName(shopNameStr);
-        shop.setLocation(locationStr);
+        shop.setShopDescription(shopDescriptionStr);
         shop.setOwner(usernameStr);
         shop.setPictureName(shopPictureName);
         shop.setDefaultMenuPrice();

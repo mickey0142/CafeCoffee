@@ -83,6 +83,7 @@ public class ShopFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         checkAuthen();
+        initText();
         initBackButton();
         initCartButton();
         initCappuccino();
@@ -106,6 +107,12 @@ public class ShopFragment extends Fragment {
                     .replace(R.id.main_view, new LoginFragment())
                     .commit();
         }
+    }
+
+    void initText()
+    {
+        TextView locationText = getView().findViewById(R.id.shop_location_text);
+        locationText.setText(shop.getShopDescription());
     }
 
     void initBackButton()

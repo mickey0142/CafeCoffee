@@ -9,7 +9,7 @@ public class Shop implements Serializable{
 
     private String ShopName;
     private String owner;
-    private String location;
+    private String shopDescription;
     private String pictureName;
     private HashMap<String, Integer> menuPrice;
     private HashMap<String, Double> shopPosition;
@@ -35,12 +35,12 @@ public class Shop implements Serializable{
         this.owner = owner;
     }
 
-    public String getLocation() {
-        return location;
+    public String getShopDescription() {
+        return shopDescription;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setShopDescription(String shopDescription) {
+        this.shopDescription = shopDescription;
     }
 
     public String getPictureName() {

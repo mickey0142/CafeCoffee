@@ -171,14 +171,14 @@
                     android:textColorHint="#000" />
 
                 <EditText
-                    android:id="@+id/register_location"
+                    android:id="@+id/register_shop_description"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="7dp"
                     android:background="@drawable/border_textinput"
                     android:drawableLeft="@drawable/ic_location"
-                    android:hint="Location"
+                    android:hint="Shop Description"
                     android:inputType="text"
                     android:padding="7dp"
                     android:textColorHint="#000" />
