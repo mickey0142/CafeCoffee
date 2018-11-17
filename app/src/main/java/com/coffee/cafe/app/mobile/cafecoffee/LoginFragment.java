@@ -1,7 +1,9 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,12 +27,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -144,59 +149,84 @@ public class LoginFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            fbStore.collection("user").whereEqualTo("email", emailStr).get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful())
-                                            {
-                                                for (QueryDocumentSnapshot document : task.getResult())
+                            if (fbAuth.getCurrentUser().isEmailVerified())
+                            {
+                                fbStore.collection("user").whereEqualTo("email", emailStr).get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful())
                                                 {
-                                                    final User user = document.toObject(User.class);
-                                                    if (user.getType().equals("customer"))
+                                                    for (QueryDocumentSnapshot document : task.getResult())
                                                     {
-                                                        Bundle bundle = new Bundle();
-                                                        bundle.putSerializable("User object", user);
-                                                        Fragment homeFragment = new CustomerHomeFragment();
-                                                        homeFragment.setArguments(bundle);
-                                                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                                                        ft.replace(R.id.main_view, homeFragment).commit();
-                                                    }
-                                                    else if (user.getType().equals("shopOwner"))
-                                                    {
-                                                        fbStore.collection("shop").whereEqualTo("owner", user.getUsername()).get()
-                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                                        if (task.isSuccessful())
-                                                                        {
-                                                                            for (QueryDocumentSnapshot document : task.getResult())
+                                                        final User user = document.toObject(User.class);
+                                                        if (user.getType().equals("customer"))
+                                                        {
+                                                            Bundle bundle = new Bundle();
+                                                            bundle.putSerializable("User object", user);
+                                                            Fragment homeFragment = new CustomerHomeFragment();
+                                                            homeFragment.setArguments(bundle);
+                                                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                                            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                                            ft.replace(R.id.main_view, homeFragment).commit();
+                                                        }
+                                                        else if (user.getType().equals("shopOwner"))
+                                                        {
+                                                            fbStore.collection("shop").whereEqualTo("owner", user.getUsername()).get()
+                                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                            if (task.isSuccessful())
                                                                             {
-                                                                                Shop shop = document.toObject(Shop.class);
-                                                                                Bundle bundle = new Bundle();
-                                                                                bundle.putSerializable("User object", user);
-                                                                                bundle.putSerializable("Shop object", shop);
-                                                                                Fragment homeFragment = new ShopOwnerHomeFragment();
-                                                                                homeFragment.setArguments(bundle);
-                                                                                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                                                                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                                                                                ft.replace(R.id.main_view, homeFragment).commit();
+                                                                                for (QueryDocumentSnapshot document : task.getResult())
+                                                                                {
+                                                                                    Shop shop = document.toObject(Shop.class);
+                                                                                    Bundle bundle = new Bundle();
+                                                                                    bundle.putSerializable("User object", user);
+                                                                                    bundle.putSerializable("Shop object", shop);
+                                                                                    Fragment homeFragment = new ShopOwnerHomeFragment();
+                                                                                    homeFragment.setArguments(bundle);
+                                                                                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                                                                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                                                                    ft.replace(R.id.main_view, homeFragment).commit();
+                                                                                }
                                                                             }
                                                                         }
-                                                                    }
-                                                                });
+                                                                    });
+                                                        }
                                                     }
                                                 }
+                                                else
+                                                {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    Log.d("cafe", "get user error : " + task.getException());
+                                                    Toast.makeText(getContext(), "Error : " + task.getException(), Toast.LENGTH_SHORT).show();
+                                                }
                                             }
-                                            else
-                                            {
-                                                progressBar.setVisibility(View.GONE);
-                                                Log.d("cafe", "get user error : " + task.getException());
-                                                Toast.makeText(getContext(), "Error : " + task.getException(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
+                                        });
+                            }
+                            else
+                            {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(getContext(), "please verify your email", Toast.LENGTH_SHORT)
+                                        .show();
+                                Log.d("login", "email not verify");
+                                final Task<AuthResult> temp = task;
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                builder.setMessage("Resend verify email ?");
+                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sendVerifyEmail(temp.getResult().getUser());
+                                    }
+                                });
+                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                                builder.show();
+                            }
                         }
                         else
                         {
@@ -236,6 +266,22 @@ public class LoginFragment extends Fragment {
                         }
                     }
                 });
+            }
+        });
+    }
+
+    void sendVerifyEmail(FirebaseUser user){
+        user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.e("cafe", "send email success");
+                Toast.makeText(getContext(), "send email success", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("cafe", "send email fail : " + e.getMessage());
+                Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

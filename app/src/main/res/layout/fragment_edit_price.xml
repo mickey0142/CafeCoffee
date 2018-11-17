@@ -7,216 +7,245 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_margin="16dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
 
-    <TextView
-        android:text="Edit price page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_gravity="center"
-        android:textColor="#84410D"/>
+            <TextView
+                android:text="Edit price page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_gravity="center"
+                android:textColor="#84410D"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/menu_items_border"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/menu_items_border"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                >
 
-        <TextView
-            android:text="Cappuccino price : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"/>
+                <TextView
+                    android:text="Cappuccino price : "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-        <EditText
-            android:id="@+id/edit_price_cappuccino"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Cappuccino price"
-            android:textAlignment="center"/>
+                <EditText
+                    android:id="@+id/edit_price_cappuccino"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Cappuccino price"
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/menu_items_border"
-        android:layout_marginTop="10dp"
-        android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/menu_items_border"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
 
-        <TextView
-            android:text="Espresso price     : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            />
+                <TextView
+                    android:text="Espresso price     : "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    />
 
-        <EditText
-            android:id="@+id/edit_price_espresso"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Cappuccino price"
-            android:textAlignment="center"/>
+                <EditText
+                    android:id="@+id/edit_price_espresso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Espresso price"
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/menu_items_border"
-        android:layout_marginTop="10dp"
-        android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/menu_items_border"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
 
-        <TextView
-            android:text="Americano price  : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"/>
+                <TextView
+                    android:text="Americano price  : "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-        <EditText
-            android:id="@+id/edit_price_americano"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Cappuccino price"
-            android:textAlignment="center"/>
+                <EditText
+                    android:id="@+id/edit_price_americano"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Americano price"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/menu_items_border"
-        android:layout_marginTop="10dp"
-        android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/menu_items_border"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
 
-        <TextView
-            android:text="Macchiato price  : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"/>
+                <TextView
+                    android:text="Macchiato price  : "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-        <EditText
-            android:id="@+id/edit_price_macchiato"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Cappuccino price"
-            android:textAlignment="center"/>
+                <EditText
+                    android:id="@+id/edit_price_macchiato"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Macchiato price"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/menu_items_border"
-        android:layout_marginTop="10dp"
-        android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/menu_items_border"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
 
-        <TextView
-            android:text="Latte price           : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"/>
+                <TextView
+                    android:text="Latte price           : "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-        <EditText
-            android:id="@+id/edit_price_latte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Cappuccino price"
-            android:textAlignment="center"/>
+                <EditText
+                    android:id="@+id/edit_price_latte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Latte price"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/menu_items_border"
-        android:layout_marginTop="10dp"
-        android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/menu_items_border"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
 
-        <TextView
-            android:text="Mocha price        : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"/>
+                <TextView
+                    android:text="Mocha price        : "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-        <EditText
-            android:id="@+id/edit_price_mocha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Cappuccino price"
-            android:textAlignment="center"/>
+                <EditText
+                    android:id="@+id/edit_price_mocha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Mocha price"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/menu_items_border"
-        android:layout_marginTop="10dp"
-        android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/menu_items_border"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
 
-        <TextView
-            android:text="Cocoa price         : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"/>
+                <TextView
+                    android:text="Cocoa price         : "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-        <EditText
-            android:id="@+id/edit_price_cocoa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Cappuccino price"
-            android:textAlignment="center"/>
+                <EditText
+                    android:id="@+id/edit_price_cocoa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Cocoa price"
+                    android:layout_weight="1"
+                    android:textAlignment="center"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/edit_price_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
+            <ProgressBar
+                android:id="@+id/edit_price_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
-    <Button
-        android:layout_marginTop="10dp"
-        android:id="@+id/edit_price_update_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="update"
-        android:background="@drawable/border_button"/>
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/edit_price_update_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="update"
+                android:textColor="#ffffff"
+                android:background="@drawable/border_button"/>
 
-    <Button
-        android:id="@+id/shop_owner_home_set_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Setting location"
-        android:layout_gravity="end"
-        android:layout_marginTop="5dp"
-        />
-    </LinearLayout>
+            <ProgressBar
+                android:id="@+id/edit_price_progress_bar_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/edit_price_set_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set shop location"
+                android:layout_gravity="end"
+                android:layout_marginTop="5dp"
+                />
+        </LinearLayout>
     </ScrollView>
 
     <LinearLayout
@@ -227,6 +256,7 @@
         android:elevation="10dp"
         android:background="@drawable/nav_border">
         <LinearLayout
+            android:id="@+id/edit_price_order_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -265,6 +295,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/edit_price_logout_button"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"

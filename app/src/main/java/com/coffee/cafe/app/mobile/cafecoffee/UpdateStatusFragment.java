@@ -1,5 +1,7 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -84,6 +87,7 @@ public class UpdateStatusFragment extends Fragment {
         initBeverageList();
         initStatusButton();
         initUpdateButton();
+        initNavBar();
     }
 
     void checkAuthen()
@@ -133,7 +137,7 @@ public class UpdateStatusFragment extends Fragment {
         customerName.setText("Customer Name : " + order.getCustomerName());
         status.setText("Status : " + order.getStatus());
         orderTime.setText("Order Time : " + order.orderTimeReverse());
-        sumPrice.setText("Total Price  : " + order.getSumPrice());
+        sumPrice.setText("Total Price  : " + order.getSumPrice() + " ฿");
     }
 
     void initBeverageList()
@@ -326,5 +330,65 @@ public class UpdateStatusFragment extends Fragment {
             Log.d("cafe", "write text file error : " + e.getMessage());
             Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    void initNavBar()
+    {
+        LinearLayout orderButton = getView().findViewById(R.id.update_status_order_button);
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                bundle.putSerializable("Shop object", shop);
+                Fragment homeFragment = new ShopOwnerHomeFragment();
+                homeFragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, homeFragment).addToBackStack(null).commit();
+            }
+        });
+
+        LinearLayout editPriceButton = getView().findViewById(R.id.update_status_edit_price_button);
+        editPriceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                bundle.putSerializable("Shop object", shop);
+                Fragment fragment = new EditPriceFragment();
+                fragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, fragment).addToBackStack(null).commit();
+            }
+        });
+
+        LinearLayout logoutButton = getView().findViewById(R.id.update_status_logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbAuth.signOut();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Do you want log out ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: dialog show.");
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_view, new LoginFragment())
+                                .commit();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: not active.");
+                    }
+                });
+                builder.show();
+            }
+        });
     }
 }

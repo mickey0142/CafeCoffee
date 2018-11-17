@@ -1,21 +1,31 @@
 package com.coffee.cafe.app.mobile.cafecoffee;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,6 +40,7 @@ public class EditPriceFragment extends Fragment {
     FirebaseFirestore fbStore = FirebaseFirestore.getInstance();
     User user;
     Shop shop;
+    FusedLocationProviderClient fusedLocationClient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +50,7 @@ public class EditPriceFragment extends Fragment {
         user = (User) bundle.getSerializable("User object");
         shop = (Shop) bundle.getSerializable("Shop object");
         Log.d("test", "user : " + user);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
     }
 
     @Nullable
@@ -58,6 +70,8 @@ public class EditPriceFragment extends Fragment {
         checkAuthen();
         initText();
         initUpdateButton();
+        initNavBar();
+        initSetShopLocationButton();
     }
 
     void checkAuthen()
@@ -138,6 +152,128 @@ public class EditPriceFragment extends Fragment {
                     Toast.makeText(getContext(), "some field isn't a number", Toast.LENGTH_SHORT).show();
                     Log.d("cafe", "some field isn't a number");
                 }
+            }
+        });
+    }
+
+    void initSetShopLocationButton()
+    {
+        final ProgressBar progressBar2 = getView().findViewById(R.id.edit_price_progress_bar_location);
+        Button setLocationButton = getView().findViewById(R.id.edit_price_set_location);
+        setLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar2.setVisibility(View.VISIBLE);
+                try {
+                    MapsInitializer.initialize(getActivity().getApplicationContext());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    progressBar2.setVisibility(View.GONE);
+                }
+                try{
+                    fusedLocationClient.getLastLocation()
+                            .addOnSuccessListener(new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    if (location != null)
+                                    {
+                                        HashMap<String, Double> shopPosition = new HashMap<>();
+                                        shopPosition.put("latitude", location.getLatitude());
+                                        shopPosition.put("longitude", location.getLongitude());
+                                        shop.setShopPosition(shopPosition);
+                                    }
+                                    else
+                                    {
+                                        Log.d("cafe", "location is null in shopOwnerHomeFragment" + location + fusedLocationClient);
+                                        Toast.makeText(getContext(), "set shop location fail (error code = 1)", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressBar2.setVisibility(View.GONE);
+                            Log.d("cafe", "get last location fail : " + e.getMessage());
+                            Toast.makeText(getContext(), "set shop location fail (error code = 2)", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Location>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Location> task) {
+                            fbStore.collection("shop").document(shop.getShopName()).set(shop)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            progressBar2.setVisibility(View.GONE);
+                                            Log.d("cafe", "set location success");
+                                            Toast.makeText(getContext(), "set location success", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressBar2.setVisibility(View.GONE);
+                                    Log.d("cafe", "add shop error : " + e.getMessage());
+                                    Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+                catch (SecurityException e)
+                {
+                    progressBar2.setVisibility(View.GONE);
+                    Log.d("cafe", "location permission not granted : " +e.getMessage());
+                    Toast.makeText(getContext(), "set shop location fail (error code = 3)" + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+                catch (NullPointerException e)
+                {
+                    progressBar2.setVisibility(View.GONE);
+                    Log.d("cafe", "catch NullPointerException : " + e.getMessage());
+                    Toast.makeText(getContext(), "set shop location fail (error code = 4)", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    void initNavBar()
+    {
+        LinearLayout orderButton = getView().findViewById(R.id.edit_price_order_button);
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("User object", user);
+                bundle.putSerializable("Shop object", shop);
+                Fragment homeFragment = new ShopOwnerHomeFragment();
+                homeFragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.main_view, homeFragment).addToBackStack(null).commit();
+            }
+        });
+
+        LinearLayout logoutButton = getView().findViewById(R.id.edit_price_logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbAuth.signOut();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Do you want log out ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: dialog show.");
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_view, new LoginFragment())
+                                .commit();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("cafe", "ERROR: not active.");
+                    }
+                });
+                builder.show();
             }
         });
     }

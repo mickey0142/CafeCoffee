@@ -15,10 +15,12 @@
                 android:id="@+id/login_skip_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="customer skip"/>
+                android:text="customer skip"
+                android:visibility="gone"/>
 
             <ImageView
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:src="@drawable/logocoffee1"/>

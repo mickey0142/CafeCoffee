@@ -11,58 +11,35 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_margin="16dp">
-    <TextView
-        android:text="Shop Owner Home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:textColor="#84410D"/>
+            <TextView
+                android:id="@+id/shop_owner_home_shop_name"
+                android:text="Shop Owner Home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:textColor="#84410D"/>
 
-    <TextView
-        android:textAlignment="center"
-        android:id="@+id/shop_owner_home_welcome_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="welcome"/>
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/shop_owner_home_welcome_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="welcome"/>
 
-    <Button
-        android:id="@+id/shop_owner_home_logout_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="log out"/>
+            <ProgressBar
+                android:id="@+id/shop_owner_home_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/shop_owner_home_edit_price_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="edit price"/>
+            <ListView
+                android:layout_marginTop="5dp"
+                android:id="@+id/shop_owner_order_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
 
-    <ProgressBar
-        android:id="@+id/shop_owner_home_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
-
-    <ListView
-        android:layout_marginTop="5dp"
-        android:id="@+id/shop_owner_order_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
-
-    <ProgressBar
-        android:id="@+id/shop_owner_home_progress_bar_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/shop_owner_home_set_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="set current position as shop location"/>
         </LinearLayout>
     </ScrollView>
 
@@ -93,6 +70,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/shop_owner_home_edit_price_button"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
             android:layout_weight="1"
@@ -112,6 +90,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/shop_owner_home_logout_button"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
             android:layout_weight="1"
