@@ -88,11 +88,11 @@
 
             <Button
                 android:layout_marginTop="10dp"
-                android:textColor="#ffffff"
+                android:textColor="#405fff"
                 android:id="@+id/login_regis_button"
                 android:layout_width="150dp"
                 android:layout_height="35dp"
-                android:background="@drawable/border_button"
+                android:background="#f8f8f8"
                 android:layout_gravity="center"
                 android:text="register"/>
 
