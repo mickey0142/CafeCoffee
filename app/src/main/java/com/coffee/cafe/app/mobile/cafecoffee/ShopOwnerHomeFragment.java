@@ -96,7 +96,7 @@ public class ShopOwnerHomeFragment extends Fragment {
     {
         final ProgressBar progressBar = getView().findViewById(R.id.shop_owner_home_progress_bar);
         progressBar.setVisibility(View.VISIBLE);
-        fbStore.collection("order").whereEqualTo("shopName", shop.getShopName()).orderBy("orderTime", Query.Direction.ASCENDING)
+        fbStore.collection("order").whereEqualTo("shopId", shop.getDocumentId()).orderBy("orderTime", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot documentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {

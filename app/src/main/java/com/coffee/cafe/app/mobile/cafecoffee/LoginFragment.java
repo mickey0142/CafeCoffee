@@ -172,7 +172,7 @@ public class LoginFragment extends Fragment {
                                                         }
                                                         else if (user.getType().equals("shopOwner"))
                                                         {
-                                                            fbStore.collection("shop").whereEqualTo("owner", user.getUsername()).get()
+                                                            fbStore.collection("shop").whereEqualTo("ownerId", user.getDocumentId()).get()
                                                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                                         @Override
                                                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {

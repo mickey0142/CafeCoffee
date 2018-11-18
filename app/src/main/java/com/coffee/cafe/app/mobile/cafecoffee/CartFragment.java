@@ -132,6 +132,7 @@ public class CartFragment extends Fragment {
                     return;
                 }
                 order.setOrderTime();
+                order.setShopId(shop.getDocumentId());
                 fbStore.collection("order").add(order)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

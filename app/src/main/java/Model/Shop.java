@@ -13,6 +13,8 @@ public class Shop implements Serializable{
     private String pictureName;
     private HashMap<String, Integer> menuPrice;
     private HashMap<String, Double> shopPosition;
+    private String documentId;
+    private String ownerId;
 
     public Shop()
     {
@@ -77,5 +79,21 @@ public class Shop implements Serializable{
         this.menuPrice.put("Latte", 20);
         this.menuPrice.put("Mocha", 20);
         this.menuPrice.put("Cocoa", 20);
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 }

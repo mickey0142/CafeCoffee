@@ -7,6 +7,7 @@ public class User implements Serializable {
     private String username;
     private String type;
     private String pictureName;
+    private String documentId;
 
     public User()
     {
@@ -50,5 +51,13 @@ public class User implements Serializable {
 
     public void setPictureName(String pictureName) {
         this.pictureName = pictureName;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 }

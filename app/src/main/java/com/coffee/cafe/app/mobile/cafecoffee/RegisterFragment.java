@@ -41,6 +41,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -71,6 +72,7 @@ public class RegisterFragment extends Fragment {
     Uri profilePictureUri;
     Uri shopPictureUri;
     FusedLocationProviderClient fusedLocationClient;
+    String userId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -174,14 +176,22 @@ public class RegisterFragment extends Fragment {
                             public void onSuccess(AuthResult authResult) {
                                 final FirebaseUser fbUser = authResult.getUser();
                                 sendVerifyEmail(fbUser);
-                                fbStore.collection("user").document(usernameStr).set(user)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                // upload everything needed here
-                                                uploadProfilePicture();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
+                                fbStore.collection("user").add(user)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        userId = documentReference.getId();
+                                        fbStore.collection("user").document(documentReference.getId())
+                                                .update("documentId", documentReference.getId())
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("cafe", "add id success");
+                                                    }
+                                                });
+                                        uploadProfilePicture();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         progressBar.setVisibility(View.GONE);
@@ -390,7 +400,7 @@ public class RegisterFragment extends Fragment {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             shopPictureUri = getImageUri(getActivity(), photo);
             String path = getRealPathFromURI(shopPictureUri);
-            //shopPictureUri = Uri.parse(path);
+            //fshopPictureUri = Uri.parse(path);
             shopPictureName = shopPictureUri.getLastPathSegment();
             ImageView profile = getView().findViewById(R.id.register_shop_picture);
             profile.setImageURI(shopPictureUri);
@@ -523,22 +533,38 @@ public class RegisterFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Location> task) {
                     final ProgressBar progressBar = getView().findViewById(R.id.register_progress_bar);
-                    fbStore.collection("shop").document(shopNameStr).set(shop)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    fbStore.collection("shop").add(shop)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
+                                public void onSuccess(DocumentReference documentReference) {
+                                    fbStore.collection("shop").document(documentReference.getId())
+                                            .update("documentId", documentReference.getId())
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d("cafe", "add id success");
+                                                }
+                                            });
+                                    fbStore.collection("shop").document(documentReference.getId())
+                                            .update("ownerId", userId)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d("cafe", "add id success");
+                                                }
+                                            });
                                     Log.d("cafe", "add shop success");
-                                    //Toast.makeText(getContext(), "add shop success", Toast.LENGTH_SHORT).show();
                                     uploadShopPicture();
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressBar.setVisibility(View.GONE);
-                            Log.d("cafe", "add shop error : " + e.getMessage());
-                            Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressBar.setVisibility(View.GONE);
+                                    Log.d("cafe", "add shop error : " + e.getMessage());
+                                    Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
             });
         }

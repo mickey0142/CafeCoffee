@@ -15,6 +15,7 @@ public class Order implements Serializable{
     private String orderTime;
     private String shopName;
     private String documentId;
+    private String shopId;
 
     public Order()
     {
@@ -114,5 +115,13 @@ public class Order implements Serializable{
 
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
     }
 }
