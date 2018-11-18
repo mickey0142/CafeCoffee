@@ -2,8 +2,10 @@ package com.coffee.cafe.app.mobile.cafecoffee;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -357,13 +359,17 @@ public class RegisterFragment extends Fragment {
             }
             ImageView placeholder = getView().findViewById(R.id.register_placeholder_icon_profile);
             placeholder.setVisibility(View.GONE);
-            profilePictureUri = data.getData();
-            String path = GetFilePathFromDevice.getPath(getContext(), profilePictureUri);
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            //profilePictureUri = data.getData();
+            profilePictureUri = getImageUri(getActivity(), photo);
+            //String path = GetFilePathFromDevice.getPath(getContext(), profilePictureUri);
+            String path = getRealPathFromURI(profilePictureUri);
+            profilePictureUri = Uri.parse(path);
             profilePictureName = profilePictureUri.getLastPathSegment();
             ImageView profile = getView().findViewById(R.id.register_selected_image);
-            //profile.setImageURI(profilePictureUri);
+            profile.setImageURI(profilePictureUri);
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
+            /*BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 5;
             Bitmap bmpSample = BitmapFactory.decodeFile(path, options);
 
@@ -373,20 +379,24 @@ public class RegisterFragment extends Fragment {
 
             Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             profile.setImageBitmap(Bitmap.createScaledBitmap(bmp, 700,
-                    700, false));
+                    700, false));*/
         }
         else if (requestCode == OPEN_CAMERA_SHOP)
         {
             if (data == null) return;
             ImageView placeholder = getView().findViewById(R.id.register_placeholder_icon_shop);
             placeholder.setVisibility(View.GONE);
-            shopPictureUri = data.getData();
+            //shopPictureUri = data.getData();
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            shopPictureUri = getImageUri(getActivity(), photo);
+            String path = getRealPathFromURI(shopPictureUri);
+            shopPictureUri = Uri.parse(path);
             shopPictureName = shopPictureUri.getLastPathSegment();
             ImageView profile = getView().findViewById(R.id.register_shop_picture);
-            //profile.setImageURI(shopPictureUri);
+            profile.setImageURI(shopPictureUri);
 
-            String path = GetFilePathFromDevice.getPath(getContext(), shopPictureUri);
-            BitmapFactory.Options options = new BitmapFactory.Options();
+            //String path = GetFilePathFromDevice.getPath(getContext(), shopPictureUri);
+            /*BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 5;
             Bitmap bmpSample = BitmapFactory.decodeFile(path, options);
 
@@ -396,8 +406,31 @@ public class RegisterFragment extends Fragment {
 
             Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             profile.setImageBitmap(Bitmap.createScaledBitmap(bmp, 700,
-                    700, false));
+                    700, false));*/
         }
+    }
+
+    public String getRealPathFromURI(Uri contentUri){
+        Cursor cursor = null;
+        try{
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = getActivity().getContentResolver().query(contentUri,proj,null,null,null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null){
+                cursor.close();
+            }
+        }
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage){
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG,1,bytes);
+        inImage = Bitmap.createScaledBitmap(inImage, 700, 700, false);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(),inImage,"Title",null);
+        return Uri.parse(path);
     }
 
     void uploadProfilePicture()

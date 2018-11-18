@@ -102,7 +102,7 @@ public class Beverage implements Serializable{
 
     public void setSize(String size) {
         this.size = size;
-        calculatePrice();
+        //calculatePrice();
     }
 
     public String getMoreDetail() {
@@ -119,7 +119,7 @@ public class Beverage implements Serializable{
 
     public void setType(String type) {
         this.type = type;
-        calculatePrice();
+        //calculatePrice();
     }
 
     public void increaseAmount()
@@ -182,7 +182,7 @@ public class Beverage implements Serializable{
         }
     }
 
-    void calculatePrice()
+    public void calculatePrice()
     {
         price = getCoffeePrice(name);
         if (size == null)

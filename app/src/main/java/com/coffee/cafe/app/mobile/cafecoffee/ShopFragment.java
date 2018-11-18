@@ -198,6 +198,7 @@ public class ShopFragment extends Fragment {
         final Beverage beverage = new Beverage(coffeeType);
         beverage.setSize("normal");
         beverage.setType("hot");
+        beverage.calculatePrice();
         beverage.setAmount(1);
         LinearLayout linearLayout = getView().findViewById(layoutId);
         final TextView price = linearLayout.findViewById(R.id.option_price);
@@ -217,6 +218,7 @@ public class ShopFragment extends Fragment {
                 normalButton.setBackgroundResource(R.drawable.border_button);
                 bigButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setSize("normal");
+                beverage.calculatePrice();
                 String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
@@ -232,6 +234,7 @@ public class ShopFragment extends Fragment {
                 normalButton.setBackgroundResource(R.drawable.actived_button);
                 bigButton.setBackgroundResource(R.drawable.border_button);
                 beverage.setSize("big");
+                beverage.calculatePrice();
                 String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
@@ -252,6 +255,7 @@ public class ShopFragment extends Fragment {
                 coldButton.setBackgroundResource(R.drawable.actived_button);
                 frappeButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setType("hot");
+                beverage.calculatePrice();
                 String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
@@ -268,6 +272,7 @@ public class ShopFragment extends Fragment {
                 coldButton.setBackgroundResource(R.drawable.border_button);
                 frappeButton.setBackgroundResource(R.drawable.actived_button);
                 beverage.setType("cold");
+                beverage.calculatePrice();
                 String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
@@ -284,6 +289,7 @@ public class ShopFragment extends Fragment {
                 coldButton.setBackgroundResource(R.drawable.actived_button);
                 frappeButton.setBackgroundResource(R.drawable.border_button);
                 beverage.setType("frappe");
+                beverage.calculatePrice();
                 String priceStr = beverage.getPrice() + " ฿";
                 if (beverage.getAmount() > 1)
                 {
