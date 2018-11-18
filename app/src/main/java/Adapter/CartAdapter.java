@@ -70,7 +70,7 @@ public class CartAdapter extends ArrayAdapter {
             public void onClick(View v) {
                 beverage.increaseAmount();
                 int num = order.getSumPrice();
-                cartPrice.setText("Total Price : " + num);
+                cartPrice.setText("Total Price : " + num + " ฿");
                 temp.notifyDataSetChanged();
             }
         });
@@ -80,7 +80,7 @@ public class CartAdapter extends ArrayAdapter {
             public void onClick(View v) {
                 beverage.decreaseAmount();
                 int num = order.getSumPrice();
-                cartPrice.setText("Total Price : " + num);
+                cartPrice.setText("Total Price : " + num + " ฿");
                 temp.notifyDataSetChanged();
             }
         });

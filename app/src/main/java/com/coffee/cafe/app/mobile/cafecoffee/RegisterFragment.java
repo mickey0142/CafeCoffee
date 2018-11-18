@@ -364,7 +364,7 @@ public class RegisterFragment extends Fragment {
             profilePictureUri = getImageUri(getActivity(), photo);
             //String path = GetFilePathFromDevice.getPath(getContext(), profilePictureUri);
             String path = getRealPathFromURI(profilePictureUri);
-            profilePictureUri = Uri.parse(path);
+            //profilePictureUri = Uri.parse(path);
             profilePictureName = profilePictureUri.getLastPathSegment();
             ImageView profile = getView().findViewById(R.id.register_selected_image);
             profile.setImageURI(profilePictureUri);
@@ -390,7 +390,7 @@ public class RegisterFragment extends Fragment {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             shopPictureUri = getImageUri(getActivity(), photo);
             String path = getRealPathFromURI(shopPictureUri);
-            shopPictureUri = Uri.parse(path);
+            //shopPictureUri = Uri.parse(path);
             shopPictureName = shopPictureUri.getLastPathSegment();
             ImageView profile = getView().findViewById(R.id.register_shop_picture);
             profile.setImageURI(shopPictureUri);
